@@ -1,0 +1,368 @@
+  {
+  "BOS": {
+    "NAAM": "Bosmans & Brusselmans BVBA",
+    "AFKORTING": "BOS",
+    "BTWNUMMER": "BE894.602.888",
+    "BTWPLICHTIG": false,
+    "BETALINGSTERMIJN": 15,
+    "ADRES": {
+      "STRAAT": "L.E. Van Arenbergplein",
+      "NUMMER": "8",
+      "BUS": "",
+      "POSTCODE": "3001",
+      "GEMEENTE": "Leuven (Heverlee)"
+    },
+    "DIENSTEN": {
+      "SCHOONMAAK": {
+        "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+        "EENHEIDSPRIJS": 159.25,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": true
+        }
+      },
+      "RAMEN": {
+        "BESCHRIJVING": "wekelijkse schoonmaak ramen",
+        "EENHEIDSPRIJS": 24.5,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": true
+        }
+      },
+      "MISC": {
+        "BESCHRIJVING": "schoonmaak algemeen",
+        "EENHEIDSPRIJS": 24.5,
+        "EENHEID": "uur",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      }
+    }
+  },
+  "PRO": {
+    "NAAM": "Gnosis Mnemosyne BVBA",
+    "AFKORTING": "PRO",
+    "BTWNUMMER": "BE0458.069.731",
+    "BTWPLICHTIG": true,
+    "BETALINGSTERMIJN": 31,
+    "ADRES": {
+      "STRAAT": "Maria-Theresiastraat ",
+      "NUMMER": "85/1",
+      "BUS": "",
+      "POSTCODE": "3000",
+      "GEMEENTE": "Leuven"
+    },
+    "DIENSTEN": {
+      "SCHOONMAAK": {
+        "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+        "EENHEIDSPRIJS": 60,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": true,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      },
+      "RAMEN": {
+        "BESCHRIJVING": "maandelijkse schoonmaak ramen",
+        "EENHEIDSPRIJS": 50,
+        "EENHEID": "maand",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": true,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      },
+      "MISC": {
+        "BESCHRIJVING": "schoonmaak vloer",
+        "EENHEIDSPRIJS": 91,
+        "EENHEID": "maand",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      }
+    }
+  },
+  "OKIO": {
+    "NAAM": "Okio Oogkliniek VOF",
+    "AFKORTING": "OKI",
+    "BTWNUMMER": "BE0662.568.693",
+    "BTWPLICHTIG": true,
+    "BETALINGSTERMIJN": 31,
+    "ADRES": {
+      "STRAAT": "Omleiding",
+      "NUMMER": "93",
+      "BUS": "",
+      "POSTCODE": "3020",
+      "GEMEENTE": "Herent"
+    },
+    "DIENSTEN": {
+      "SCHOONMAAK": {
+        "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+        "EENHEIDSPRIJS": 207,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": true,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": true
+        }
+      },
+      "RAMEN": {
+        "BESCHRIJVING": "schoonmaak ramen",
+        "EENHEIDSPRIJS": 50,
+        "EENHEID": "Uur",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      },
+      "MISC": {
+        "BESCHRIJVING": "schoonmaak algemeen",
+        "EENHEIDSPRIJS": 91,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      }
+    }
+  },
+  "BEF": {
+    "NAAM": "BeFit",
+    "AFKORTING": "BEF",
+    "BTWNUMMER": "BE0859.883.818",
+    "BTWPLICHTIG": true,
+    "BETALINGSTERMIJN": 31,
+    "ADRES": {
+      "STRAAT": "Binkomstraat",
+      "NUMMER": "3",
+      "BUS": "2",
+      "POSTCODE": "3391",
+      "GEMEENTE": "Meensel-Kiezegem"
+    },
+    "DIENSTEN": {
+      "SCHOONMAAK": {
+        "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+        "EENHEIDSPRIJS": 142.5,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": true,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": true,
+          "ZONDAG": false
+        }
+      },
+      "RAMEN": {
+        "BESCHRIJVING": "schoonmaak ramen",
+        "EENHEIDSPRIJS": 50,
+        "EENHEID": "Uur",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      },
+      "MISC": {
+        "BESCHRIJVING": "schoonmaak algemeen",
+        "EENHEIDSPRIJS": 91,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      }
+    }
+  },
+  "DUT": {
+    "NAAM": "DUTSEL VOF",
+    "AFKORTING": "DUT",
+    "BTWNUMMER": "BE0666.997.437",
+    "BTWPLICHTIG": true,
+    "BETALINGSTERMIJN": 31,
+    "ADRES": {
+      "STRAAT": "Dutselstraat",
+      "NUMMER": "117",
+      "BUS": "",
+      "POSTCODE": "3220",
+      "GEMEENTE": "Holsbeek"
+    },
+    "DIENSTEN": {
+      "SCHOONMAAK": {
+        "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+        "EENHEIDSPRIJS": 142.5,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": true,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": true,
+          "VRIJDAG": false,
+          "ZATERDAG": true,
+          "ZONDAG": false
+        }
+      },
+      "RAMEN": {
+        "BESCHRIJVING": "schoonmaak ramen",
+        "EENHEIDSPRIJS": 50,
+        "EENHEID": "Uur",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      },
+      "MISC": {
+        "BESCHRIJVING": "schoonmaak algemeen",
+        "EENHEIDSPRIJS": 91,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      }
+    }
+  },
+  "318": {
+    "NAAM": "PRAKTIJK 318 BVBA",
+    "AFKORTING": "318",
+    "BTWNUMMER": "BE0675.566.297",
+    "BTWPLICHTIG": true,
+    "BETALINGSTERMIJN": 31,
+    "ADRES": {
+      "STRAAT": "Tiensesteenweg",
+      "NUMMER": "318",
+      "BUS": "",
+      "POSTCODE": "3000",
+      "GEMEENTE": "Leuven"
+    },
+    "DIENSTEN": {
+      "SCHOONMAAK": {
+        "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+        "EENHEIDSPRIJS": 125.0,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": true,
+          "ZONDAG": false
+        }
+      },
+      "RAMEN": {
+        "BESCHRIJVING": "schoonmaak ramen",
+        "EENHEIDSPRIJS": 50,
+        "EENHEID": "Uur",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      },
+      "MISC": {
+        "BESCHRIJVING": "schoonmaak algemeen",
+        "EENHEIDSPRIJS": 91,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      }
+    }
+  }
+}
