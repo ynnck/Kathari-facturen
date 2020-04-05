@@ -1,30 +1,30 @@
 {
     "algemeen": {
         "BTW-percentage": 0,
-        "volgnummer": "2020/BOS/51",
-        "periode": "2020-01-01",
-        "factuurdatum": "2020-01-31",
-        "vervaldatum": "2020-02-15",
+        "volgnummer": "2020/BOS/63",
+        "periode": "2020-03-01",
+        "factuurdatum": "2020-03-31",
+        "vervaldatum": "2020-04-15",
         "totaalbedrag": {
-            "btw exclusief": 735.0,
-            "btw inclusief": 735.0
+            "btw exclusief": 459.38,
+            "btw inclusief": 459.38
         }
     },
     "records": [
         {
             "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
-            "NUMBER_OF_WORKING_DAYS": 4.0,
-            "AMOUNT": 637.0,
+            "NUMBER_OF_WORKING_DAYS": 2.5,
+            "AMOUNT": 398.125,
             "UNIT_PRICE": 159.25
         },
         {
             "BESCHRIJVING": "wekelijkse schoonmaak ramen",
-            "NUMBER_OF_WORKING_DAYS": 4.0,
-            "AMOUNT": 98.0,
+            "NUMBER_OF_WORKING_DAYS": 2.5,
+            "AMOUNT": 61.25,
             "UNIT_PRICE": 24.5
         },
         {
-            "BESCHRIJVING": "schoonmaak algemeen",
+            "BESCHRIJVING": "oude boeken naar container brengen",
             "NUMBER_OF_WORKING_DAYS": 0.0,
             "AMOUNT": 0.0,
             "UNIT_PRICE": 24.5

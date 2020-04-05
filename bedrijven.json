@@ -44,7 +44,7 @@
         }
       },
       "MISC": {
-        "BESCHRIJVING": "schoonmaak algemeen",
+        "BESCHRIJVING": "oude boeken naar container brengen",
         "EENHEIDSPRIJS": 24.5,
         "EENHEID": "uur",
         "WERKTIJDEN_EENHEID": "boolean",
@@ -204,7 +204,7 @@
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
-          "WOENSDAG": true,
+          "WOENSDAG": false,
           "DONDERDAG": false,
           "VRIJDAG": false,
           "ZATERDAG": true,
@@ -259,8 +259,8 @@
     "DIENSTEN": {
       "SCHOONMAAK": {
         "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
-        "EENHEIDSPRIJS": 142.5,
-        "EENHEID": "week",
+        "EENHEIDSPRIJS": 25.0,
+        "EENHEID": "uur",
         "WERKTIJDEN_EENHEID": "boolean",
         "WERKTIJDEN": {
           "MAANDAG": true,
@@ -268,7 +268,7 @@
           "WOENSDAG": false,
           "DONDERDAG": true,
           "VRIJDAG": false,
-          "ZATERDAG": true,
+          "ZATERDAG": false,
           "ZONDAG": false
         }
       },
