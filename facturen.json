@@ -1,21 +1,21 @@
 {
     "algemeen": {
-        "BTW-percentage": 21,
-        "volgnummer": "2020/DUT/64",
+        "BTW-percentage": 0,
+        "volgnummer": "2020/CLE/65",
         "periode": "2020-03-01",
         "factuurdatum": "2020-03-31",
         "vervaldatum": "2020-05-01",
         "totaalbedrag": {
-            "btw exclusief": 425.0,
-            "btw inclusief": 514.25
+            "btw exclusief": 750.0,
+            "btw inclusief": 750.0
         }
     },
     "records": [
         {
             "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
-            "NUMBER_OF_WORKING_DAYS": 17.0,
-            "AMOUNT": 425.0,
-            "UNIT_PRICE": 25.0
+            "NUMBER_OF_WORKING_DAYS": 4.0,
+            "AMOUNT": 700.0,
+            "UNIT_PRICE": 175.0
         },
         {
             "BESCHRIJVING": "schoonmaak ramen",
@@ -24,10 +24,10 @@
             "UNIT_PRICE": 50
         },
         {
-            "BESCHRIJVING": "schoonmaak algemeen",
-            "NUMBER_OF_WORKING_DAYS": 0.0,
-            "AMOUNT": 0.0,
-            "UNIT_PRICE": 91
+            "BESCHRIJVING": "Verplaatsingskosten",
+            "NUMBER_OF_WORKING_DAYS": 1.0,
+            "AMOUNT": 50.0,
+            "UNIT_PRICE": 50
         }
     ]
 }

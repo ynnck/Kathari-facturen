@@ -364,5 +364,66 @@
         }
       }
     }
+  },
+  "CLE": {
+    "NAAM": "CLEMY'S BVBA",
+    "AFKORTING": "CLE",
+    "BTWNUMMER": "BE0866.093.796",
+    "BTWPLICHTIG": false,
+    "BETALINGSTERMIJN": 31,
+    "ADRES": {
+      "STRAAT": "Elisabethlaan",
+      "NUMMER": "41",
+      "BUS": "",
+      "POSTCODE": "3200",
+      "GEMEENTE": "Aarschot"
+    },
+    "DIENSTEN": {
+      "SCHOONMAAK": {
+        "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+        "EENHEIDSPRIJS": 175.0,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": true,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": true,
+          "ZONDAG": false
+        }
+      },
+      "RAMEN": {
+        "BESCHRIJVING": "schoonmaak ramen",
+        "EENHEIDSPRIJS": 50,
+        "EENHEID": "Uur",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      },
+      "MISC": {
+        "BESCHRIJVING": "Verplaatsingskosten",
+        "EENHEIDSPRIJS": 50,
+        "EENHEID": "maand",
+        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN": {
+          "MAANDAG": true,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": true,
+          "ZONDAG": false
+        }
+      }
+    }
   }
 }
