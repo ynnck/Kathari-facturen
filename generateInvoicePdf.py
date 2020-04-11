@@ -1,4 +1,3 @@
-import pdfkit
 from weasyprint import HTML, CSS
 
 
@@ -24,13 +23,13 @@ def write(data={"default": "default"}, saveName="temp.pdf", html="invoice.html",
     """
     try:
         with open(html) as fp:
-            doc = fp.read()
+            html_replaced = fp.read()
     except:
         print("HTML could not be loaded")
 
     try:
         for key, value in data.items():
-            doc = doc.replace("{%s}" % key, str(value))
+            html_replaced = html_replaced.replace("{%s}" % key, str(value))
     except:
         print("Problem with data dictionairy")
 
@@ -48,9 +47,9 @@ def write(data={"default": "default"}, saveName="temp.pdf", html="invoice.html",
             "quiet": ""
         }
         config = pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf')
-        pdfkit.from_string(doc, saveName, options=options, configuration=config)
+        pdfkit.from_string(html_replaced, saveName, options=options, configuration=config)
         print("{} has been created".format(saveName)) """
-        HTML(html).write_pdf(target = saveName)
+        HTML(string=html_replaced).write_pdf(target = saveName)
 
     except Exception  as e:
         print("File could not be printed")
