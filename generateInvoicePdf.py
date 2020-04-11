@@ -1,4 +1,5 @@
 import pdfkit
+from weasyprint import HTML, CSS
 
 
 def write(data={"default": "default"}, saveName="temp.pdf", html="invoice.html",):
@@ -34,6 +35,8 @@ def write(data={"default": "default"}, saveName="temp.pdf", html="invoice.html",
         print("Problem with data dictionairy")
 
     try:
+        """ 
+        Old option: Pdfkit (does not work on osx, css does not load)
         options = {
             "page-size": "A4",
             "dpi": 300,
@@ -46,6 +49,11 @@ def write(data={"default": "default"}, saveName="temp.pdf", html="invoice.html",
         }
         config = pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf')
         pdfkit.from_string(doc, saveName, options=options, configuration=config)
-        print("{} has been created".format(saveName))
-    except:
+        print("{} has been created".format(saveName)) """
+        HTML(html).write_pdf(target = saveName)
+
+    except Exception  as e:
         print("File could not be printed")
+        print(str(e))
+
+write()

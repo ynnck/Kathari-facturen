@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,36 +8,40 @@
 
     <title>Factuur Clean&Co</title>
 <style>
+@page{
+    size: A4;
+    margin: 2.5cm 0pt 0pt 2cm;
+}
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
   --font-Playfair: "Playfair Display", serif;
   --color-blue: #65bfcf;
   font-family: "Montserrat", sans-serif;
-  font-size: 24px;
+  font-size: 9pt;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-content: space-between;
-  width: 1240px;
-  height: 1950px;
+  width: 16.76cm;
+  height: 24.8cm;
 }
 .sizeLarge {
   color: var(--color-blue);
-  font-size: 36px;
+  font-size: 15pt;
   font-family: var(--font-Playfair);
 }
 .logo {
   color: var(--color-blue);
-  font-size: 100px;
+  font-size: 43.5pt;
   font-family: var(--font-Playfair);
 }
 #factuur{
-  margin-bottom: 50px;
+  margin-bottom: 22.5pt;
 }
 .factuurInfo {
   display: flex;
   flex-direction: row;
-  margin-bottom: 40px;
+  margin-bottom: 23pt;
 }
 .factuurInfo .col:nth-child(4n +1){
  width: 26%;
@@ -55,8 +59,8 @@ width: 17%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-left: 5px solid var(--color-blue);
-  padding-left: 20px;
+  border-left: 1pt solid #65bfcf;
+  padding-left: 8pt;
 }
 .col p {
   margin: 0;
@@ -65,7 +69,7 @@ width: 17%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  margin-bottom: 80px;
+  margin-bottom: 36pt;
 }
 .recordsCell{
   flex-grow: 1;
@@ -104,7 +108,8 @@ width: 17%;
 }
 .total div:nth-child(odd){
   width: 80%;
-  text-align: end;
+  text-align: right;
+  align-content: flex-end;
 }
 .total div:nth-child(even){
  width: 20%;
@@ -165,15 +170,15 @@ h4 {
 </div>
 <div class="total">
 	<div class="sizeLarge recordsCell">Totaal excl BTW: </div>
-	<div class="sizeLarge recordsCell">&#8364 {BTW EXCLUSIEF}</div>
+	<div class="sizeLarge recordsCell">&#8364; {BTW EXCLUSIEF}</div>
 	<div class="sizeLarge recordsCell">Totaal incl BTW: </div>
-	<div class="sizeLarge recordsCell">&#8364 {BTW INCLUSIEF}</div>
+	<div class="sizeLarge recordsCell">&#8364; {BTW INCLUSIEF}</div>
 </div>
 </div>
 <div class="footer">
 	<p class="opgemaakt">Opgemaakt te Leuven</p>
 	<p class="juridisch">Het protest tegen de factuur dient schriftelijk te gebeuren binnen de 8 dagen na factuurdatum. Men wordt verzocht steeds de datum en het nummer van de factuur te vermelden. In geval van betwisting is uitsluitend de rechtbank van Leuven bevoegd. De opdrachtgever verbindt er zich bij het toewijzen van een opdracht de factuur als betalingsuitnodiging te betalen tegen de vervaldatum zoals op de factuur vermeld. Hiervan kan enkel van afgeweken worden mits schriftelijke overeenkomst. Bij niet-betaling binnen de betalingstermijn zal de factuur verhoogd worden met 20% en met een minimum van 25EUR.</p>
-	<h3 class="algemeen">Ljiljana Cvorovic &#8212 Hulsberg 36, 3010 Kessel-Lo &#8212 BTW BE0703.928.505</br>IBAN BE03 3631 7885 3084</h3>
+	<h3 class="algemeen">Ljiljana Cvorovic &#8212; Hulsberg 36, 3010 Kessel-Lo &#8212; BTW BE0703.928.505</br>IBAN BE03 3631 7885 3084</h3>
 </div>
 </body>
 </html> 
