@@ -1,0 +1,118 @@
+body {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    --font-Playfair: "Playfair Display", serif;
+    --color-blue: #65bfcf;
+    font-family: "Montserrat", sans-serif;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+    width: 1240px;
+    height: 1950px;
+  }
+  .sizeLarge {
+    color: var(--color-blue);
+    font-size: 36px;
+    font-family: var(--font-Playfair);
+  }
+  .logo {
+    color: var(--color-blue);
+    font-size: 100px;
+    font-family: var(--font-Playfair);
+  }
+  #factuur{
+    margin-bottom: 50px;
+  }
+  .factuurInfo {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+  }
+  .factuurInfo .col:nth-child(4n +1){
+   width: 26%;
+  }
+  .factuurInfo .col:nth-child(4n +2){
+  width: 26%;
+  }
+  .factuurInfo .col:nth-child(4n +3){
+  width: 26%;
+  }
+  .factuurInfo .col:nth-child(4n +4){
+  width: 17%;
+  }
+  .col{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 5px solid var(--color-blue);
+    padding-left: 20px;
+  }
+  .col p {
+    margin: 0;
+  }
+  .factuurRecords {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-bottom: 80px;
+  }
+  .recordsCell{
+    flex-grow: 1;
+    width: 20%;
+    overflow: hidden;
+  }
+  .factuurRecords .recordsCell:nth-child(5n + 1){
+   width: 43%;
+   text-align:start;
+  }
+  .factuurRecords .recordsCell:nth-child(5n + 2){
+   width: 15%;
+   text-align:center;
+  }
+  .factuurRecords .recordsCell:nth-child(5n + 3){
+   width: 10%;
+   text-align:center;
+  }
+  .factuurRecords .recordsCell:nth-child(5n + 4){
+   width: 7%;
+   text-align:center;
+  }
+  .factuurRecords .recordsCell:nth-child(5n + 5){
+   width: 20%;
+   text-align:center;
+  }
+  .total {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .total{
+      display: flex;
+      flex-flow: row wrap;
+  }
+  .total div:nth-child(odd){
+    width: 80%;
+    text-align: end;
+  }
+  .total div:nth-child(even){
+   width: 20%;
+   text-align: center;
+  }
+  .juridisch {
+    text-align: justify;
+    color: darkgrey;
+  }
+  .algemeen {
+    text-align: center;
+  }
+  h3,
+  h2,
+  h4 {
+    color: var(--color-blue);
+  }
+  .footnote{
+      width: 97%;
+      text-align: end;
+  }

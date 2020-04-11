@@ -1,275 +1,264 @@
 import json
-import datetime
+import datetime as dt
 import calendar
 import locale
 import generateInvoicePdf
 import query_yes_no
 import os
+from collections import Counter
 
-locale.setlocale(locale.LC_ALL, 'nl_BE')
-
-def getFirstDayOfMonth(date=datetime.date.today()):
-    if isinstance(date, datetime.date):
-        return date.replace(day=1)
-    print('ingevoerde datum is geen datetime.date, \
-           datum van vandaag werd gereturned')
-    return datetime.date.today()
+locale.setlocale(locale.LC_ALL, "nl_BE")
 
 
-def getLastDayOfMonth(date=datetime.date.today()):
-    if isinstance(date, datetime.date):
-        return datetime.date(
-            date.year,
-            date.month,
-            calendar.monthrange(date.year, date.month)[1])
-    print('ingevoerde datum is geen datetime.date, \
-           datum van vandaag werd gereturned')
-    return datetime.date.today()
+def getFirstDayOfMonth(date=dt.date.today()):
+    returndate = date.replace(day=1) if isinstance(date, dt.date) else dt.date.today()
+    if returndate == dt.date.today():
+        print(
+            "ingevoerde datum is geen dt.date, \
+            datum van vandaag werd gereturned"
+        )
+    return returndate
 
 
-def calcNumberOfDaysInMonth(begindatum, einddatum):
-    dagen = {
-        'MAANDAG': 0,
-        'DINSDAG': 0,
-        'WOENSDAG': 0,
-        'DONDERDAG': 0,
-        'VRIJDAG': 0,
-        'ZATERDAG': 0,
-        'ZONDAG': 0
-    }
-   nrBeginDate = begindatum.strftime("%d")
-   nrDays = einddatum - begindatum
-   #IS + 1 NECESSARY because of range?
-    for dag in range(nrBeginDate,  nrBeginDate + nrDays + 1):
-        weekdag = datetime.date(datum.year, datum.month, dag).isoweekday()
-        if weekdag == 1:
-            dagen['MAANDAG'] += 1
-        elif weekdag == 2:
-            dagen['DINSDAG'] += 1
-        elif weekdag == 3:
-            dagen['WOENSDAG'] += 1
-        elif weekdag == 4:
-            dagen['DONDERDAG'] += 1
-        elif weekdag == 5:
-            dagen['VRIJDAG'] += 1
-        elif weekdag == 6:
-            dagen['ZATERDAG'] += 1
-        elif weekdag == 7:
-            dagen['ZONDAG'] += 1
-    return dagen
+def getLastDayOfMonth(date=dt.date.today()):
+    returndate = (
+        dt.date(date.year, date.month, calendar.monthrange(date.year, date.month)[1])
+        if isinstance(date, dt.date)
+        else date.today()
+    )
+    if returndate == date.today():
+        print(
+            "ingevoerde datum is geen dt.date, \
+            datum van vandaag werd gereturned"
+        )
+    return returndate
 
 
-def calcNumberOfWorkingDays(eenheid, werktijdenEenheid, werktijden, begindatum, einddatum):
-    dagenInPeriode = calcNumberOfDaysInMonth(begindatum, einddatum)
-    aantalDagen = 0
+def calcNumberOfDaysInMonth(date_from, date_to):
+    days = Counter()
 
-    if werktijdenEenheid == 'volledige dagen':
-        werkdagen = []
-        for key, value in werktijden.items():
-            if value:
-                werkdagen.append(key)
-        for werkdag in werkdagen:
-            aantalDagen += dagenInPeriode[werkdag]/len(werkdagen)
+    for i in range((date_to - date_from).days + 1):
+        days[(date_from + dt.timedelta(i)).strftime("%A")] += 1
+    return days
 
+
+def calcNumberOfWorkingDays(unit, schedule, date_from, date_to):
+    days_in_period = calcNumberOfDaysInMonth(date_from, date_to)
+    number_of_days = 0
+
+    if unit == "volledige dagen":
+        workdays = [key.lower() for (key, value) in schedule.items() if value]
+        number_of_days = (
+            round(sum(days_in_period[day] / len(workdays) for day in workdays) * 2) / 2
+        )
     # if werktijdenEenheid=='deeltijdse dagen':
-        # NOG UITDENKEN HOE DIT GEPRINT GAAT WORDEN? PER UUR DAN?
 
-    return round(aantalDagen * 2) / 2
+    return number_of_days
 
-def calcStringPeriod(begindate, enddate):
-    if begindate == getFirstDayOfMonth() and enddate == getLastDayOfMonth():
-        return begindate.strftime("%B %Y")
-    elif begindate.strftime('%m%y') == enddate.strftime('%m%y'):
-        return  '{} - {} {}'.format(
-            begindate.strftime('%d'),
-            enddate.strftime('%d'),
-            begindate.strftime('%B %Y')
+
+def createStringPeriod(date_from, date_to):
+    period = ""
+    if date_from == getFirstDayOfMonth(date_from) and date_to == getLastDayOfMonth(date_to):
+        period = date_from.strftime("%B %Y")
+    elif date_from.strftime("%m%y") == date_to.strftime("%m%y"):
+        period = "{} - {} {}".format(
+            date_from.strftime("%d"),
+            date_to.strftime("%d"),
+            date_from.strftime("%B %Y"),
         )
     else:
-        return '{} - {}'.format(
-            begindate.strftime('%d %B %Y'),
-            enddate.strftime('%d %B %Y')
+        period = "{} - {}".format(
+            date_from.strftime("%d %B %Y"), date_to.strftime("%d %B %Y")
         )
+    return period
 
 
-def calcTotalAmount(factuurlijnen, btw=21):
-    excl = 0
-    for lijn in factuurlijnen:
-        excl += lijn['AMOUNT']
-    incl = excl * (1 + (btw / 100))
-    return {'btw exclusief': round(excl, 2), 'btw inclusief': round(incl, 2)}
+def calcTotalAmount(records, btw=21):
+    excl = round(sum(rec["AMOUNT"] for rec in records), 2) if records else 0
+    incl = (
+        round(
+            sum(
+                (rec["AMOUNT"] * ((100 + rec["VAT"]) / 100))
+                for rec in records
+            ),
+            2,
+        )
+        if records
+        else 0
+    )
+    return {"btw exclusief": excl, "btw inclusief": incl}
 
 
-def inputValueAndCheck(beschrijving, standaardwaarde, typeBestand):
+def inputValueAndCheck(description, value_standard, extension):
     while True:
-        inputwaarde = input('Geef %s in (default: %s):' %
-                            (beschrijving, standaardwaarde))
+        value_input = input("Geef %s in (default: %s):" % (description, value_standard))
         try:
-            if typeBestand == 'int':
-                return int(inputwaarde) \
-                    if inputwaarde else int(standaardwaarde)
-            elif typeBestand == 'float':
-                return float(inputwaarde) \
-                    if inputwaarde else float(standaardwaarde)
-            elif typeBestand == 'datetime':
-                for fmt in ('%Y-%m-%d', '%B %Y', '%Y/%m/%d'):
+            if extension == "int":
+                value_return = int(value_input) if value_input else int(value_standard)
+            elif extension == "float":
+                value_return = (
+                    float(value_input) if value_input else float(value_standard)
+                )
+            elif extension == "dt":
+                for date_format in ("%Y%m%d", "%Y-%m-%d", "%B %Y", "%Y/%m/%d"):
                     try:
-                        # we willen datetime teruggeven,
+                        # we willen dt teruggeven,
                         # dus eerst zien dat standaardwaarde geen string is,
-                        # anders omzetten naar datetime
-                        standaardwaarde = standaardwaarde \
-                            if type(standaardwaarde) == datetime.date \
-                            else datetime.datetime.strptime(standaardwaarde,
-                                                            fmt)
-                        return datetime.datetime.strptime(inputwaarde, fmt) \
-                            if inputwaarde else standaardwaarde
-                    except ValueError:
+                        # anders omzetten naar dt
+                        value_standard = (
+                            value_standard
+                            if type(value_standard) == dt.date
+                            else dt.datetime.strptime(value_standard, date_format).date()
+                        )
+                        value_return = (
+                            dt.datetime.strptime(value_input, date_format).date()
+                            if value_input
+                            else value_standard
+                        )
+                    except:
                         pass
-                raise ValueError(
-                    'datum in foute formaat,\
-                     gelieve een juist formaat in te voeren: \
-                     jaar-maand-dag of maand jaar')
-            elif typeBestand == 'str':
-                return inputwaarde if inputwaarde else standaardwaarde
+                if not value_return: 
+                    print(
+                        '"datum in foute formaat,\
+                        gelieve een juist formaat in te voeren: \
+                        jaar-maand-dag of maand jaar"'
+                    )
+                    pass
+
+            elif extension == "str":
+                value_return = value_input if value_input else value_standard
+            return value_return
         except ValueError:
-            print('Foute invoer, Gelieve opnieuw te proberen')
+            print("Foute invoer, Gelieve opnieuw te proberen")
 
 
 ############### BEGIN
 # LEES JSONFILES EN INITIATIE
-script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-with open(os.path.join(script_dir, 'bedrijven.json')) as json_file:
+script_dir = os.path.dirname(__file__)
+with open(os.path.join(script_dir, "bedrijven.json")) as json_file:
     data = json.load(json_file)
-with open(os.path.join(script_dir, 'settings.json')) as json_file:
+with open(os.path.join(script_dir, "settings.json")) as json_file:
     settings = json.load(json_file)
-FACTUUR = {'algemeen': {}, 'records': []}
+
+FACTUUR = {"algemeen": {}, "records": []}
 
 # KEUZE BEDRIJF
 for bedrijf in data:
-    print('- {} (afkorting: {})'.format(data[bedrijf]['NAAM'], bedrijf))
-INPUT_KEUZE_BEDRIJF = inputValueAndCheck(
-    'de afkorting van bedrijf waarvoor u een factuur wilt maken',
-    'none',
-    'str')
-BEDRIJF = data[INPUT_KEUZE_BEDRIJF]
+    print("- {} (afkorting: {})".format(data[bedrijf]["NAAM"], bedrijf))
+input_company = inputValueAndCheck(
+    "de afkorting van bedrijf waarvoor u een factuur wilt maken", "none", "str"
+)
+BEDRIJF = data[input_company.upper()]
 
 # BTWPERCENTAGE
-FACTUUR['algemeen']['BTW-percentage'] = settings['BTWTARIEF'] \
-    if BEDRIJF['BTWPLICHTIG'] else 0
+VAT = settings["BTWTARIEF"] if BEDRIJF["BTWPLICHTIG"] else 0
 
 # VOLGNUMMER (+ handelen leading zeros)
-FACTUUR['algemeen']['volgnummer'] = inputValueAndCheck(
-    'volgnummer',
-    '{}/{}/{:04d}'.format(datetime.date.today().year, 
-                          BEDRIJF['AFKORTING'], 
-                          settings['TELLER']), 
-                          'str'
-                          )
-settings['TELLER'] = int(FACTUUR['algemeen']['volgnummer'].split('/')[2].lstrip('0'))
-
-#PERIODE
-#if query_yes_no.ask_question('Wilt u een factuur opmaken voor heel de maand?'):
-#    FACTUUR['algemeen']['periode'] = inputValueAndCheck(
-#        'factuurperiode (in formaat: maand jaar)',
-#        datetime.date.today().strftime("%B %Y"),
-#        'datetime')
-#else: 
-FACTUUR['algemeen']['begindatum'] = inputValueAndCheck(
-    'begindatum factuurperiode (in formaat: jaar-maand-dag)',
-    getFirstDayOfMonth(),
-    'datetime')
-FACTUUR['algemeen']['einddatum'] = inputValueAndCheck(
-    'einddatum factuurperiode (in formaat: jaar-maand-dag)',
-    getLastDayOfMonth(),
-    'datetime')
-FACTUUR['algemeen']['periode'] = calcStringPeriod(
-    FACTUUR['algemeen']['begindatum'],
-    FACTUUR['algemeen']['einddatum']
+REFERENCE = inputValueAndCheck(
+    "volgnummer",
+    "{}/{}/{:04d}".format(
+        dt.date.today().year, BEDRIJF["AFKORTING"], settings["TELLER"]
+    ),
+    "str",
 )
+# TELLER in settings updaten met ingevoerde volgnummer
+settings["TELLER"] = int(REFERENCE.split("/")[2].lstrip("0"))
 
-#FACTUURDATUM
-FACTUUR['algemeen']['factuurdatum'] = FACTUUR['algemeen']['einddatum']
+DATE_FROM = inputValueAndCheck(
+    "begindatum factuurperiode (in formaat: jaar-maand-dag)",
+    getFirstDayOfMonth(),
+    "dt",
+)
+DATE_TO = inputValueAndCheck(
+    "einddatum factuurperiode (in formaat: jaar-maand-dag)", getLastDayOfMonth(), "dt",
+)
+PERIOD = createStringPeriod(DATE_FROM, DATE_TO)
+DATE_INVOICE = DATE_TO
 
-#VERVALDATUM
-vervaldatumStart = FACTUUR['algemeen']['factuurdatum'] if \
-    FACTUUR['algemeen']['factuurdatum'] > datetime.date.today() else \
-    datetime.date.today()
-FACTUUR['algemeen']['vervaldatum'] = vervaldatumStart + \
-    datetime.timedelta(days=BEDRIJF['BETALINGSTERMIJN'])
+DATE_START_PAYMENT = DATE_INVOICE if DATE_INVOICE > dt.date.today() else dt.date.today()
+DATE_PAYMENT = DATE_START_PAYMENT + dt.timedelta(days=BEDRIJF["BETALINGSTERMIJN"])
 
 # FACTUURLIJNEN
-for (key, rec) in BEDRIJF['DIENSTEN'].items():
+RECORDS = []
+for (key, rec) in BEDRIJF["DIENSTEN"].items():
     RECORD = {}
-    RECORD['BESCHRIJVING'] = rec['BESCHRIJVING']
-    RECORD['NUMBER_OF_WORKING_DAYS'] = calcNumberOfWorkingDays(
-        rec['EENHEID'],
-        rec['WERKTIJDEN_EENHEID'],
-        rec['WERKTIJDEN'],
-        FACTUUR['algemeen']['begindatum'],
-        FACTUUR['algemeen']['einddatum'])
-    RECORD['NUMBER_OF_WORKING_DAYS'] = inputValueAndCheck(
-            'aantal werkuren voor: %s' % rec['BESCHRIJVING'],
-            RECORD['NUMBER_OF_WORKING_DAYS'],
-            'float')
-    RECORD['AMOUNT'] = RECORD['NUMBER_OF_WORKING_DAYS'] * rec['EENHEIDSPRIJS']
-    RECORD['UNIT_PRICE'] = rec['EENHEIDSPRIJS']
+    RECORD["NUMBER_OF_WORKING_DAYS"] = inputValueAndCheck(
+        "aantal werkuren voor: {}".format(rec["BESCHRIJVING"]),
+        calcNumberOfWorkingDays(
+            rec["WERKTIJDEN_EENHEID"], rec["WERKTIJDEN"], DATE_FROM, DATE_TO,
+        ),
+        "float",
+    )
+    if RECORD["NUMBER_OF_WORKING_DAYS"] > 0:
+        RECORD["DESCRIPTION"] = rec["BESCHRIJVING"]
+        RECORD["AMOUNT"] = RECORD["NUMBER_OF_WORKING_DAYS"] * rec["EENHEIDSPRIJS"]
+        RECORD["UNIT_PRICE"] = rec["EENHEIDSPRIJS"]
+        RECORD["VAT"] = VAT
+        RECORDS.append(RECORD)
 
-    FACTUUR['records'].append(RECORD)
-
-FACTUUR['algemeen']['totaalbedrag'] = calcTotalAmount(
-    FACTUUR['records'],
-    FACTUUR['algemeen']['BTW-percentage'])
+TOTAL = calcTotalAmount(RECORDS)
 
 
-with open(os.path.join(script_dir, "facturen.json"), "w") as read_file:
+with open(os.path.join(script_dir, "facturen.json"), "r") as read_file:
     feed = json.load(read_file)
 with open(os.path.join(script_dir, "facturen.json"), "w") as write_file:
+
     def jsonConverter(val):
-        if isinstance(val, datetime.date):
+        if isinstance(val, dt.date):
             return val.strftime("%Y-%m-%d")
+
     feed.append(FACTUUR)
     json.dump(feed, write_file, default=jsonConverter, indent=4)
 
-if query_yes_no.ask_question('Wilt u de factuur afprinten?'):
+if query_yes_no.ask_question("Wilt u de factuur afprinten?"):
     recordsInvoice = ""
-    strBtwVerlegd = False
-    for rec in FACTUUR['records']:
-        
-        if rec['NUMBER_OF_WORKING_DAYS'] > 0: 
-            strBtw = '%s %%' % FACTUUR['algemeen']['BTW-percentage']
-            if FACTUUR['algemeen']['BTW-percentage'] == 0:
-                strBtw += '<sup>1</sup>'
-                strBtwVerlegd = True
 
-            recordsInvoice += '''
-                <div class='recordsCell'>%s</div>
-                <div class='recordsCell'>%s</div>
-                <div class='recordsCell'>&#8364 %s</div>
-                <div class='recordsCell'>%s</div>
-                <div class='recordsCell'>&#8364 %s</div>
-            ''' % (rec['BESCHRIJVING'], rec['NUMBER_OF_WORKING_DAYS'], rec['UNIT_PRICE'], strBtw, rec['AMOUNT'])
+    for rec in RECORDS:
+        # bereken string eerst en dan plakken
+        VAT_SUPER = "<sup>1</sup>" if rec["VAT"] == 0 else ""
+        strBtw = "{}%{}".format(rec["VAT"], VAT_SUPER)
 
-    if strBtwVerlegd:
-        recordsInvoice += '<div class="footnote"><sup>1. Belasting te voldoen door de medecontractant, KB nr. 1, art. 20</sup></div>'
+        recordsInvoice += """
+            <div class='recordsCell'>{}</div>
+            <div class='recordsCell'>{}</div>
+            <div class='recordsCell'>&#8364 {}</div>
+            <div class='recordsCell'>{}</div>
+            <div class='recordsCell'>&#8364 {}</div>
+        """.format(
+            rec["DESCRIPTION"],
+            rec["NUMBER_OF_WORKING_DAYS"],
+            rec["UNIT_PRICE"],
+            strBtw,
+            rec["AMOUNT"],
+        )
 
-    dataInvoice = {"BEDRIJFSNAAM": BEDRIJF['NAAM'],
-                   "ADRES": BEDRIJF['ADRES']['STRAAT'],
-                   "NUMMER": BEDRIJF['ADRES']['NUMMER'],
-                   "BUS": BEDRIJF['ADRES']['BUS'],
-                   "POSTCODE": BEDRIJF['ADRES']['POSTCODE'],
-                   "GEMEENTE": BEDRIJF['ADRES']['GEMEENTE'],
-                   "VOLGNUMMER": FACTUUR['algemeen']['volgnummer'],
-                   "FACTUURDATUM": FACTUUR['algemeen']['factuurdatum'].strftime("%d/%m/%Y"),
-                   "VERVALDATUM": FACTUUR['algemeen']['vervaldatum'].strftime("%d/%m/%Y"),
-                   "PERIODE": FACTUUR['algemeen']['periode'].strftime("%B %Y"),
-                   "BTW EXCLUSIEF": FACTUUR['algemeen']['totaalbedrag']['btw exclusief'],
-                   "BTW INCLUSIEF": FACTUUR['algemeen']['totaalbedrag']['btw inclusief'],
-                   "RECORDS": recordsInvoice}
-    nameInvoice = "factuur_%s_%04d_%s.pdf" % (
-        FACTUUR['algemeen']['periode'].strftime("%Y"), settings['TELLER'], BEDRIJF['AFKORTING'])
-    generateInvoice.write(data=dataInvoice, saveName=nameInvoice)
+    VAT_EXPL = (
+        '<div class="footnote"><sup>1. Belasting te voldoen door de medecontractant, KB nr. 1, art. 20</sup></div>'
+        if VAT == 0
+        else ""
+    )
+    recordsInvoice += VAT_EXPL
 
-with open(os.path.join(script_dir, "settings.json"), "w") as write_file: 
-    settings['TELLER'] += 1
+    dataInvoice = {
+        "BEDRIJFSNAAM": BEDRIJF["NAAM"],
+        "ADRES": BEDRIJF["ADRES"]["STRAAT"],
+        "NUMMER": BEDRIJF["ADRES"]["NUMMER"],
+        "BUS": BEDRIJF["ADRES"]["BUS"],
+        "POSTCODE": BEDRIJF["ADRES"]["POSTCODE"],
+        "GEMEENTE": BEDRIJF["ADRES"]["GEMEENTE"],
+        "VOLGNUMMER": REFERENCE,
+        "FACTUURDATUM": DATE_INVOICE.strftime("%d/%m/%Y"),
+        "VERVALDATUM": DATE_PAYMENT.strftime("%d/%m/%Y"),
+        "PERIODE": PERIOD,
+        "BTW EXCLUSIEF": TOTAL["btw exclusief"],
+        "BTW INCLUSIEF": TOTAL["btw inclusief"],
+        "RECORDS": recordsInvoice,
+    }
+    nameInvoice = "factuur_{}_{:04d}_{}.pdf".format(
+        DATE_INVOICE.strftime('%Y'), settings["TELLER"], BEDRIJF["AFKORTING"],
+    )
+    generateInvoicePdf.write(data=dataInvoice, saveName=nameInvoice)
 
+with open(os.path.join(script_dir, "settings.json"), "w") as write_file:
+    settings["TELLER"] += 1
     json.dump(settings, write_file, indent=4)

@@ -17,7 +17,7 @@
         "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
         "EENHEIDSPRIJS": 159.25,
         "EENHEID": "week",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -32,7 +32,7 @@
         "BESCHRIJVING": "wekelijkse schoonmaak ramen",
         "EENHEIDSPRIJS": 24.5,
         "EENHEID": "week",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -47,7 +47,7 @@
         "BESCHRIJVING": "oude boeken naar container brengen",
         "EENHEIDSPRIJS": 24.5,
         "EENHEID": "uur",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -78,7 +78,7 @@
         "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
         "EENHEIDSPRIJS": 60,
         "EENHEID": "week",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -93,7 +93,7 @@
         "BESCHRIJVING": "maandelijkse schoonmaak ramen",
         "EENHEIDSPRIJS": 50,
         "EENHEID": "maand",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -108,7 +108,7 @@
         "BESCHRIJVING": "schoonmaak vloer",
         "EENHEIDSPRIJS": 91,
         "EENHEID": "maand",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -139,7 +139,7 @@
         "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
         "EENHEIDSPRIJS": 207,
         "EENHEID": "week",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -154,7 +154,7 @@
         "BESCHRIJVING": "schoonmaak ramen",
         "EENHEIDSPRIJS": 50,
         "EENHEID": "Uur",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -169,7 +169,7 @@
         "BESCHRIJVING": "schoonmaak algemeen",
         "EENHEIDSPRIJS": 91,
         "EENHEID": "week",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -200,7 +200,7 @@
         "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
         "EENHEIDSPRIJS": 142.5,
         "EENHEID": "week",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -215,7 +215,7 @@
         "BESCHRIJVING": "schoonmaak ramen",
         "EENHEIDSPRIJS": 50,
         "EENHEID": "Uur",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -230,7 +230,7 @@
         "BESCHRIJVING": "schoonmaak algemeen",
         "EENHEIDSPRIJS": 91,
         "EENHEID": "week",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -261,7 +261,7 @@
         "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
         "EENHEIDSPRIJS": 25.0,
         "EENHEID": "uur",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": true,
           "DINSDAG": false,
@@ -276,7 +276,7 @@
         "BESCHRIJVING": "schoonmaak ramen",
         "EENHEIDSPRIJS": 50,
         "EENHEID": "Uur",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -291,7 +291,7 @@
         "BESCHRIJVING": "schoonmaak algemeen",
         "EENHEIDSPRIJS": 91,
         "EENHEID": "week",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -322,7 +322,7 @@
         "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
         "EENHEIDSPRIJS": 125.0,
         "EENHEID": "week",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -337,7 +337,7 @@
         "BESCHRIJVING": "schoonmaak ramen",
         "EENHEIDSPRIJS": 50,
         "EENHEID": "Uur",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -352,7 +352,7 @@
         "BESCHRIJVING": "schoonmaak algemeen",
         "EENHEIDSPRIJS": 91,
         "EENHEID": "week",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -383,7 +383,7 @@
         "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
         "EENHEIDSPRIJS": 175.0,
         "EENHEID": "week",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": true,
           "DINSDAG": false,
@@ -398,7 +398,7 @@
         "BESCHRIJVING": "schoonmaak ramen",
         "EENHEIDSPRIJS": 50,
         "EENHEID": "Uur",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
@@ -413,7 +413,7 @@
         "BESCHRIJVING": "Verplaatsingskosten",
         "EENHEIDSPRIJS": 50,
         "EENHEID": "maand",
-        "WERKTIJDEN_EENHEID": "boolean",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": true,
           "DINSDAG": false,
