@@ -5,6 +5,8 @@ import locale
 import generateInvoicePdf
 import query_yes_no
 import os
+import html
+
 from collections import Counter
 
 locale.setlocale(locale.LC_ALL, "nl_BE")
@@ -58,7 +60,9 @@ def calcNumberOfWorkingDays(unit, schedule, date_from, date_to):
 
 def createStringPeriod(date_from, date_to):
     period = ""
-    if date_from == getFirstDayOfMonth(date_from) and date_to == getLastDayOfMonth(date_to):
+    if date_from == getFirstDayOfMonth(date_from) and date_to == getLastDayOfMonth(
+        date_to
+    ):
         period = date_from.strftime("%B %Y")
     elif date_from.strftime("%m%y") == date_to.strftime("%m%y"):
         period = "{} - {} {}".format(
@@ -76,13 +80,7 @@ def createStringPeriod(date_from, date_to):
 def calcTotalAmount(records, btw=21):
     excl = round(sum(rec["AMOUNT"] for rec in records), 2) if records else 0
     incl = (
-        round(
-            sum(
-                (rec["AMOUNT"] * ((100 + rec["VAT"]) / 100))
-                for rec in records
-            ),
-            2,
-        )
+        round(sum((rec["AMOUNT"] * ((100 + rec["VAT"]) / 100)) for rec in records), 2,)
         if records
         else 0
     )
@@ -108,7 +106,9 @@ def inputValueAndCheck(description, value_standard, extension):
                         value_standard = (
                             value_standard
                             if type(value_standard) == dt.date
-                            else dt.datetime.strptime(value_standard, date_format).date()
+                            else dt.datetime.strptime(
+                                value_standard, date_format
+                            ).date()
                         )
                         value_return = (
                             dt.datetime.strptime(value_input, date_format).date()
@@ -117,7 +117,7 @@ def inputValueAndCheck(description, value_standard, extension):
                         )
                     except:
                         pass
-                if not value_return: 
+                if not value_return:
                     print(
                         '"datum in foute formaat,\
                         gelieve een juist formaat in te voeren: \
@@ -246,16 +246,16 @@ if query_yes_no.ask_question("Wilt u de factuur afprinten?"):
         "BUS": BEDRIJF["ADRES"]["BUS"],
         "POSTCODE": BEDRIJF["ADRES"]["POSTCODE"],
         "GEMEENTE": BEDRIJF["ADRES"]["GEMEENTE"],
-        "VOLGNUMMER": REFERENCE,
+        "VOLGNUMMER": str(REFERENCE).replace("/", "&#8725;"),
         "FACTUURDATUM": DATE_INVOICE.strftime("%d/%m/%Y"),
         "VERVALDATUM": DATE_PAYMENT.strftime("%d/%m/%Y"),
-        "PERIODE": PERIOD,
+        "PERIODE": str(PERIOD).replace(" ", "&nbsp;").replace("-", "&#45;"),
         "BTW EXCLUSIEF": TOTAL["btw exclusief"],
         "BTW INCLUSIEF": TOTAL["btw inclusief"],
         "RECORDS": recordsInvoice,
     }
     nameInvoice = "factuur_{}_{:04d}_{}.pdf".format(
-        DATE_INVOICE.strftime('%Y'), settings["TELLER"], BEDRIJF["AFKORTING"],
+        DATE_INVOICE.strftime("%Y"), settings["TELLER"], BEDRIJF["AFKORTING"],
     )
     generateInvoicePdf.write(data=dataInvoice, saveName=nameInvoice)
 

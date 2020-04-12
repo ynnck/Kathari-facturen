@@ -55,6 +55,12 @@ width: 26%;
 .factuurInfo .col:nth-child(4n +4){
 width: 17%;
 }
+.info{
+  width: 100%;
+}
+.infoLaatste{
+  width:100%;
+}
 .col{
   display: flex;
   flex-direction: column;
@@ -145,19 +151,19 @@ h4 {
 <div class="factuurInfo">
 	<div class="col">
 		<div class="sizeLarge">Volgnummer</div>
-		<p>{VOLGNUMMER}</p>
+		<p class="info">{VOLGNUMMER}</p>
 	</div>
 	<div class="col">
 		<div class="sizeLarge">Factuurdatum</div>
-		<p>{FACTUURDATUM}</p>
+		<p class="info">{FACTUURDATUM}</p>
 	</div>
 	<div class="col">
 		<div class="sizeLarge">Vervaldatum</div>
-		<p>{VERVALDATUM}</p>
+		<p class="info">{VERVALDATUM}</p>
 	</div>
 	<div class="col">
 		<div class="sizeLarge">Periode</div>
-		<p>{PERIODE}</p>
+		<p class="infoLaatste">{PERIODE}</p>
 	</div>
 </div>
 <div class="factuurRecords">

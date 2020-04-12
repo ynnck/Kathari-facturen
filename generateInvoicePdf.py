@@ -1,7 +1,9 @@
 from weasyprint import HTML, CSS
 
 
-def write(data={"default": "default"}, saveName="temp.pdf", html="invoice.html",):
+def write(
+    data={"default": "default"}, saveName="temp.pdf", html="invoice.html",
+):
     """
     Reads html and data and prints pdf file
 
@@ -28,8 +30,10 @@ def write(data={"default": "default"}, saveName="temp.pdf", html="invoice.html",
         print("HTML could not be loaded")
 
     try:
+
         for key, value in data.items():
             html_replaced = html_replaced.replace("{%s}" % key, str(value))
+
     except:
         print("Problem with data dictionairy")
 
@@ -49,10 +53,8 @@ def write(data={"default": "default"}, saveName="temp.pdf", html="invoice.html",
         config = pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf')
         pdfkit.from_string(html_replaced, saveName, options=options, configuration=config)
         print("{} has been created".format(saveName)) """
-        HTML(string=html_replaced).write_pdf(target = saveName)
+        HTML(string=html_replaced).write_pdf(target=saveName)
 
-    except Exception  as e:
+    except Exception as e:
         print("File could not be printed")
         print(str(e))
-
-write()
