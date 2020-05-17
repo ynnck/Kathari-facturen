@@ -261,15 +261,15 @@
         "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
         "EENHEIDSPRIJS": 25.0,
         "EENHEID": "uur",
-        "WERKTIJDEN_EENHEID": "volledige dagen",
+        "WERKTIJDEN_EENHEID": "uren",
         "WERKTIJDEN": {
           "MAANDAG": true,
-          "DINSDAG": false,
-          "WOENSDAG": false,
-          "DONDERDAG": true,
-          "VRIJDAG": false,
-          "ZATERDAG": false,
-          "ZONDAG": false
+          "DINSDAG": 3,
+          "WOENSDAG": 0,
+          "DONDERDAG": 3,
+          "VRIJDAG": 0,
+          "ZATERDAG": 0,
+          "ZONDAG": 0
         }
       },
       "RAMEN": {

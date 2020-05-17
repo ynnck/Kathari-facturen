@@ -1,43 +1,47 @@
- <!DOCTYPE html>
-<html lang="nl">
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet"> 
 
     <title>Factuur Clean&Co</title>
 <style>
+@page{
+    size: A4;
+    margin: 2.5cm 0pt 0pt 2cm;
+}
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
   --font-Playfair: "Playfair Display", serif;
   --color-blue: #65bfcf;
   font-family: "Montserrat", sans-serif;
-  font-size: 24px;
+  font-size: 9pt;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-content: space-between;
-  width: 1240px;
-  height: 1950px;
+  width: 16.76cm;
+  height: 24.8cm;
 }
 .sizeLarge {
   color: var(--color-blue);
-  font-size: 36px;
+  font-size: 15pt;
   font-family: var(--font-Playfair);
 }
 .logo {
   color: var(--color-blue);
-  font-size: 100px;
+  font-size: 43.5pt;
   font-family: var(--font-Playfair);
 }
 #factuur{
-  margin-bottom: 50px;
+  margin-bottom: 22.5pt;
 }
 .factuurInfo {
   display: flex;
   flex-direction: row;
-  margin-bottom: 40px;
+  margin-bottom: 23pt;
 }
 .factuurInfo .col:nth-child(4n +1){
  width: 26%;
@@ -51,12 +55,18 @@ width: 26%;
 .factuurInfo .col:nth-child(4n +4){
 width: 17%;
 }
+.info{
+  width: 100%;
+}
+.infoLaatste{
+  width:100%;
+}
 .col{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-left: 5px solid var(--color-blue);
-  padding-left: 20px;
+  border-left: 1pt solid #65bfcf;
+  padding-left: 8pt;
 }
 .col p {
   margin: 0;
@@ -65,7 +75,7 @@ width: 17%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  margin-bottom: 80px;
+  margin-bottom: 36pt;
 }
 .recordsCell{
   flex-grow: 1;
@@ -104,7 +114,8 @@ width: 17%;
 }
 .total div:nth-child(odd){
   width: 80%;
-  text-align: end;
+  text-align: right;
+  align-content: flex-end;
 }
 .total div:nth-child(even){
  width: 20%;
@@ -131,12 +142,13 @@ h4 {
 <body>
 <div class="logo">Clean & Co</div>
 <div>
-	Bitewing Bv<br/>
-	Onze-Lieve-Vrouwstraat 13<br/>
-  3020 Herent
+	{BEDRIJFSNAAM} <br/>
+	{ADRES}, {NUMMER} {BUS} <br/>
+	{POSTCODE} {GEMEENTE}
 </div>
 <div>
 <div class="sizeLarge" id="factuur">OFFERTE</div>
+
 <div class="factuurRecords">
 	<div class="sizeLarge recordsCell">OMSCHRIJVING</div>
 	<div class="sizeLarge recordsCell">AANTAL</div>
@@ -144,22 +156,22 @@ h4 {
 	<div class="sizeLarge recordsCell">BTW</div>
 	<div class="sizeLarge recordsCell">SUBTOTAAL</div>
 	<div class='recordsCell'>Schoonmaak praktijk (2x per week)</div>
-        <div class='recordsCell'>1 week</div>
-        <div class='recordsCell'>&#8364; 175,00</div>
-        <div class='recordsCell'>21%</div>
-        <div class='recordsCell'>&#8364; 211,75</div>
+  <div class='recordsCell'>1 week</div>
+  <div class='recordsCell'>&#8364; {bedrag}</div>
+  <div class='recordsCell'>21%</div>
+  <div class='recordsCell'>&#8364; {bedrag}</div>
 </div>
 <div class="total">
 	<div class="sizeLarge recordsCell">Totaal excl BTW: </div>
-	<div class="sizeLarge recordsCell">&#8364; 175,00</div>
+	<div class="sizeLarge recordsCell">&#8364; {BTW EXCLUSIEF}</div>
 	<div class="sizeLarge recordsCell">Totaal incl BTW: </div>
-	<div class="sizeLarge recordsCell">&#8364; 211,75</div>
+	<div class="sizeLarge recordsCell">&#8364; {BTW INCLUSIEF}</div>
 </div>
 </div>
 <div class="footer">
-	<p class="opgemaakt">Opgemaakt te Leuven op 15/03/2020</p>
-	<p class="juridisch">Deze offerte is geldig gedurende drie maanden.</p>
-	<h3 class="algemeen">Ljiljana Cvorovic &#8212; Hulsberg 36, 3010 Kessel-Lo &#8212; BTW BE0703.928.505<br />IBAN BE03 3631 7885 3084</h3>
+	<p class="opgemaakt">Opgemaakt te Leuven op {datum}</p>
+  <p class="juridisch">Deze offerte is geldig gedurende drie maanden.</p>
+  <h3 class="algemeen">Ljiljana Cvorovic &#8212; Hulsberg 36, 3010 Kessel-Lo &#8212; BTW BE0703.928.505</br>IBAN BE03 3631 7885 3084</h3>
 </div>
 </body>
 </html> 

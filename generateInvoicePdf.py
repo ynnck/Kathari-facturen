@@ -58,3 +58,8 @@ def write(
     except Exception as e:
         print("File could not be printed")
         print(str(e))
+
+def write_offer(
+    data={"default": "default"}, saveName="offerte.pdf", html="offerte.html",
+):
+    write(data=data, saveName=saveName, html=html)

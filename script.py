@@ -46,16 +46,18 @@ def calcNumberOfDaysInMonth(date_from, date_to):
 
 def calcNumberOfWorkingDays(unit, schedule, date_from, date_to):
     days_in_period = calcNumberOfDaysInMonth(date_from, date_to)
-    number_of_days = 0
+    number_of_work_units = 0
 
     if unit == "volledige dagen":
         workdays = [key.lower() for (key, value) in schedule.items() if value]
-        number_of_days = (
+        number_of_work_units = (
             round(sum(days_in_period[day] / len(workdays) for day in workdays) * 2) / 2
+        )
+    elif unit == "uren":
         )
     # if werktijdenEenheid=='deeltijdse dagen':
 
-    return number_of_days
+    return number_of_work_units
 
 
 def createStringPeriod(date_from, date_to):
@@ -170,7 +172,7 @@ DATE_FROM = inputValueAndCheck(
     "dt",
 )
 DATE_TO = inputValueAndCheck(
-    "einddatum factuurperiode (in formaat: jaar-maand-dag)", getLastDayOfMonth(), "dt",
+    "einddatum factuurperiode (in formaat: jaar-maand-dag)", getLastDayOfMonth(date=DATE_FROM), "dt",
 )
 PERIOD = createStringPeriod(DATE_FROM, DATE_TO)
 DATE_INVOICE = DATE_TO
