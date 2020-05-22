@@ -1,4 +1,5 @@
 from weasyprint import HTML, CSS
+import os
 
 
 def write(
@@ -53,7 +54,7 @@ def write(
         config = pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf')
         pdfkit.from_string(html_replaced, saveName, options=options, configuration=config)
         print("{} has been created".format(saveName)) """
-        HTML(string=html_replaced).write_pdf(target=saveName)
+        HTML(string=html_replaced, base_url=os.getcwd()).write_pdf(target=saveName)
 
     except Exception as e:
         print("File could not be printed")
