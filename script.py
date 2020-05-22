@@ -53,8 +53,8 @@ def calcNumberOfWorkingDays(unit, schedule, date_from, date_to):
         number_of_work_units = (
             round(sum(days_in_period[day] / len(workdays) for day in workdays) * 2) / 2
         )
-    elif unit == "uren":
-        )
+    #elif unit == "uren":
+        
     # if werktijdenEenheid=='deeltijdse dagen':
 
     return number_of_work_units
