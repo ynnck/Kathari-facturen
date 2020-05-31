@@ -44,9 +44,9 @@
         }
       },
       "MISC": {
-        "BESCHRIJVING": "oude boeken naar container brengen",
-        "EENHEIDSPRIJS": 24.5,
-        "EENHEID": "uur",
+        "BESCHRIJVING": "extra onderhoud",
+        "EENHEIDSPRIJS": 100.45,
+        "EENHEID": "week",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
@@ -105,9 +105,9 @@
         }
       },
       "MISC": {
-        "BESCHRIJVING": "schoonmaak vloer",
-        "EENHEIDSPRIJS": 91,
-        "EENHEID": "maand",
+        "BESCHRIJVING": "extra onderhoud",
+        "EENHEIDSPRIJS": 0,
+        "EENHEID": "week",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
@@ -166,8 +166,8 @@
         }
       },
       "MISC": {
-        "BESCHRIJVING": "schoonmaak algemeen",
-        "EENHEIDSPRIJS": 91,
+        "BESCHRIJVING": "extra onderhoud",
+        "EENHEIDSPRIJS": 82.8,
         "EENHEID": "week",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
@@ -228,7 +228,7 @@
       },
       "MISC": {
         "BESCHRIJVING": "schoonmaak algemeen",
-        "EENHEIDSPRIJS": 91,
+        "EENHEIDSPRIJS": 82.8,
         "EENHEID": "week",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
@@ -288,8 +288,8 @@
         }
       },
       "MISC": {
-        "BESCHRIJVING": "schoonmaak algemeen",
-        "EENHEIDSPRIJS": 91,
+        "BESCHRIJVING": "extra onderhoud",
+        "EENHEIDSPRIJS": 51.75,
         "EENHEID": "week",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
@@ -349,7 +349,7 @@
         }
       },
       "MISC": {
-        "BESCHRIJVING": "schoonmaak algemeen",
+        "BESCHRIJVING": "extra onderhoud",
         "EENHEIDSPRIJS": 91,
         "EENHEID": "week",
         "WERKTIJDEN_EENHEID": "volledige dagen",
@@ -380,7 +380,7 @@
     },
     "DIENSTEN": {
       "SCHOONMAAK": {
-        "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+        "BESCHRIJVING": "wekelijkse schoonmaak",
         "EENHEIDSPRIJS": 175.0,
         "EENHEID": "week",
         "WERKTIJDEN_EENHEID": "volledige dagen",
@@ -395,9 +395,9 @@
         }
       },
       "RAMEN": {
-        "BESCHRIJVING": "schoonmaak ramen",
+        "BESCHRIJVING": "wekelijkse schoonmaak ramen",
         "EENHEIDSPRIJS": 50,
-        "EENHEID": "Uur",
+        "EENHEID": "week",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
@@ -421,6 +421,67 @@
           "DONDERDAG": false,
           "VRIJDAG": false,
           "ZATERDAG": true,
+          "ZONDAG": false
+        }
+      }
+    }
+  },
+  "BIT": {
+    "NAAM": "BITEWING BV",
+    "AFKORTING": "BIT",
+    "BTWNUMMER": "BE0733.685.927",
+    "BTWPLICHTIG": true,
+    "BETALINGSTERMIJN": 31,
+    "ADRES": {
+      "STRAAT": "Onze-Lieve-Vrouwstraat",
+      "NUMMER": "13",
+      "BUS": "",
+      "POSTCODE": "3020",
+      "GEMEENTE": "Herent"
+    },
+    "DIENSTEN": {
+      "SCHOONMAAK": {
+        "BESCHRIJVING": "wekelijkse schoonmaak",
+        "EENHEIDSPRIJS": 175.0,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": true,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": true,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      },
+      "RAMEN": {
+        "BESCHRIJVING": "wekelijkse schoonmaak ramen",
+        "EENHEIDSPRIJS": 50,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      },
+      "MISC": {
+        "BESCHRIJVING": "Verplaatsingskosten",
+        "EENHEIDSPRIJS": 50,
+        "EENHEID": "maand",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
           "ZONDAG": false
         }
       }
