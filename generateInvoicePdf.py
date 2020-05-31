@@ -3,7 +3,7 @@ import os
 
 
 def write(
-    data={"default": "default"}, saveName="temp.pdf", html="invoice.html",
+    data={"default": "default"}, saveName="temp.pdf", html="invoice.html", folder=None, **args
 ):
     """
     Reads html and data and prints pdf file
@@ -18,6 +18,8 @@ def write(
         DESCRIPTION. The default is "temp.pdf".
     html : TYPE, optional
         DESCRIPTION. The default is "invoice.html".
+    folder: STRING, optional
+        DESCRIPTION. The defauls is None
 
     Returns
     -------
@@ -39,22 +41,8 @@ def write(
         print("Problem with data dictionairy")
 
     try:
-        """ 
-        Old option: Pdfkit (does not work on osx, css does not load)
-        options = {
-            "page-size": "A4",
-            "dpi": 300,
-            "encoding": "utf-8",
-            "margin-top": "2.5cm",
-            "margin-bottom": "0cm",
-            "margin-left": "2cm",
-            "margin-right": "2cm",
-            "quiet": ""
-        }
-        config = pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf')
-        pdfkit.from_string(html_replaced, saveName, options=options, configuration=config)
-        print("{} has been created".format(saveName)) """
-        HTML(string=html_replaced, base_url=os.getcwd()).write_pdf(target=saveName)
+        target = os.path.join(folder, saveName) if folder else saveName
+        HTML(string=html_replaced, base_url=os.getcwd()).write_pdf(target=target)
 
     except Exception as e:
         print("File could not be printed")

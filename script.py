@@ -259,7 +259,7 @@ if query_yes_no.ask_question("Wilt u de factuur afprinten?"):
     nameInvoice = "factuur_{}_{:04d}_{}.pdf".format(
         DATE_INVOICE.strftime("%Y"), settings["TELLER"], BEDRIJF["AFKORTING"],
     )
-    generateInvoicePdf.write(data=dataInvoice, saveName=nameInvoice)
+    generateInvoicePdf.write(data=dataInvoice, saveName=nameInvoice, folder='Facturen')
 
 with open(os.path.join(script_dir, "settings.json"), "w") as write_file:
     settings["TELLER"] += 1
