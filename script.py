@@ -1,5 +1,5 @@
 import json
-import datetime as dt
+import datetime
 import calendar
 import locale
 import generateInvoicePdf
@@ -12,25 +12,25 @@ from collections import Counter
 locale.setlocale(locale.LC_ALL, "nl_BE")
 
 
-def getFirstDayOfMonth(date=dt.date.today()):
-    returndate = date.replace(day=1) if isinstance(date, dt.date) else dt.date.today()
-    if returndate == dt.date.today():
+def getFirstDayOfMonth(date=datetime.date.today()):
+    returndate = date.replace(day=1) if isinstance(date, datetime.date) else datetime.date.today()
+    if not isinstance(date, datetime.date):
         print(
-            "ingevoerde datum is geen dt.date, \
+            "ingevoerde datum is geen datetime.date, \
             datum van vandaag werd gereturned"
         )
     return returndate
 
 
-def getLastDayOfMonth(date=dt.date.today()):
+def getLastDayOfMonth(date=datetime.date.today()):
     returndate = (
-        dt.date(date.year, date.month, calendar.monthrange(date.year, date.month)[1])
-        if isinstance(date, dt.date)
-        else date.today()
+        datetime.date(date.year, date.month, calendar.monthrange(date.year, date.month)[1])
+        if isinstance(date, datetime.date)
+        else datetime.date.today()
     )
-    if returndate == date.today():
+    if not isinstance(date, datetime.date):
         print(
-            "ingevoerde datum is geen dt.date, \
+            "ingevoerde datum is geen datetime.date, \
             datum van vandaag werd gereturned"
         )
     return returndate
@@ -40,7 +40,7 @@ def calcNumberOfDaysInMonth(date_from, date_to):
     days = Counter()
 
     for i in range((date_to - date_from).days + 1):
-        days[(date_from + dt.timedelta(i)).strftime("%A")] += 1
+        days[(date_from + datetime.timedelta(i)).strftime("%A")] += 1
     return days
 
 
@@ -99,21 +99,21 @@ def inputValueAndCheck(description, value_standard, extension):
                 value_return = (
                     float(value_input) if value_input else float(value_standard)
                 )
-            elif extension == "dt":
+            elif extension == "datetime":
                 for date_format in ("%Y%m%d", "%Y-%m-%d", "%B %Y", "%Y/%m/%d"):
                     try:
-                        # we willen dt teruggeven,
+                        # we willen datetime teruggeven,
                         # dus eerst zien dat standaardwaarde geen string is,
-                        # anders omzetten naar dt
+                        # anders omzetten naar datetime
                         value_standard = (
                             value_standard
-                            if type(value_standard) == dt.date
-                            else dt.datetime.strptime(
+                            if type(value_standard) == datetime.date
+                            else datetime.datetime.strptime(
                                 value_standard, date_format
                             ).date()
                         )
                         value_return = (
-                            dt.datetime.strptime(value_input, date_format).date()
+                            datetime.datetime.strptime(value_input, date_format).date()
                             if value_input
                             else value_standard
                         )
@@ -159,7 +159,7 @@ VAT = settings["BTWTARIEF"] if BEDRIJF["BTWPLICHTIG"] else 0
 REFERENCE = inputValueAndCheck(
     "volgnummer",
     "{}/{}/{:04d}".format(
-        dt.date.today().year, BEDRIJF["AFKORTING"], settings["TELLER"]
+        datetime.date.today().year, BEDRIJF["AFKORTING"], settings["TELLER"]
     ),
     "str",
 )
@@ -169,16 +169,17 @@ settings["TELLER"] = int(REFERENCE.split("/")[2].lstrip("0"))
 DATE_FROM = inputValueAndCheck(
     "begindatum factuurperiode (in formaat: jaar-maand-dag)",
     getFirstDayOfMonth(),
-    "dt",
+    "datetime",
 )
+
 DATE_TO = inputValueAndCheck(
-    "einddatum factuurperiode (in formaat: jaar-maand-dag)", getLastDayOfMonth(date=DATE_FROM), "dt",
+    "einddatum factuurperiode (in formaat: jaar-maand-dag)", getLastDayOfMonth(date=DATE_FROM), "datetime",
 )
 PERIOD = createStringPeriod(DATE_FROM, DATE_TO)
 DATE_INVOICE = DATE_TO
 
-DATE_START_PAYMENT = DATE_INVOICE if DATE_INVOICE > dt.date.today() else dt.date.today()
-DATE_PAYMENT = DATE_START_PAYMENT + dt.timedelta(days=BEDRIJF["BETALINGSTERMIJN"])
+DATE_START_PAYMENT = DATE_INVOICE if DATE_INVOICE > datetime.date.today() else datetime.date.today()
+DATE_PAYMENT = DATE_START_PAYMENT + datetime.timedelta(days=BEDRIJF["BETALINGSTERMIJN"])
 
 # FACTUURLIJNEN
 RECORDS = []
@@ -206,7 +207,7 @@ with open(os.path.join(script_dir, "facturen.json"), "r") as read_file:
 with open(os.path.join(script_dir, "facturen.json"), "w") as write_file:
 
     def jsonConverter(val):
-        if isinstance(val, dt.date):
+        if isinstance(val, datetime.date):
             return val.strftime("%Y-%m-%d")
 
     feed.append(FACTUUR)
