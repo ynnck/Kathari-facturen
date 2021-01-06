@@ -97,7 +97,7 @@
         "WERKTIJDEN": {
           "MAANDAG": false,
           "DINSDAG": false,
-          "WOENSDAG": true,
+          "WOENSDAG": false,
           "DONDERDAG": false,
           "VRIJDAG": false,
           "ZATERDAG": false,
@@ -152,7 +152,7 @@
       },
       "RAMEN": {
         "BESCHRIJVING": "schoonmaak ramen",
-        "EENHEIDSPRIJS": 50,
+        "EENHEIDSPRIJS": 26,
         "EENHEID": "Uur",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
@@ -166,9 +166,9 @@
         }
       },
       "MISC": {
-        "BESCHRIJVING": "extra onderhoud",
-        "EENHEIDSPRIJS": 82.8,
-        "EENHEID": "week",
+        "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+        "EENHEIDSPRIJS": 23,
+        "EENHEID": "uur",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": false,
@@ -227,8 +227,8 @@
         }
       },
       "MISC": {
-        "BESCHRIJVING": "schoonmaak algemeen",
-        "EENHEIDSPRIJS": 82.8,
+        "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+        "EENHEIDSPRIJS": 70,
         "EENHEID": "week",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
@@ -381,7 +381,7 @@
     "DIENSTEN": {
       "SCHOONMAAK": {
         "BESCHRIJVING": "wekelijkse schoonmaak",
-        "EENHEIDSPRIJS": 175.0,
+        "EENHEIDSPRIJS": 156.25,
         "EENHEID": "week",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
@@ -409,10 +409,25 @@
           "ZONDAG": false
         }
       },
-      "MISC": {
+      "TRANSPORT": {
         "BESCHRIJVING": "Verplaatsingskosten",
         "EENHEIDSPRIJS": 50,
         "EENHEID": "maand",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
+        "WERKTIJDEN": {
+          "MAANDAG": true,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": true,
+          "ZONDAG": false
+        }
+      },
+      "MISC": {
+        "BESCHRIJVING": "extra onderhoud",
+        "EENHEIDSPRIJS": 192.625,
+        "EENHEID": "week",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
           "MAANDAG": true,
@@ -456,8 +471,8 @@
         }
       },
       "RAMEN": {
-        "BESCHRIJVING": "wekelijkse schoonmaak ramen",
-        "EENHEIDSPRIJS": 50,
+        "BESCHRIJVING": "wekelijkse schoonmaak",
+        "EENHEIDSPRIJS": 115,
         "EENHEID": "week",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
@@ -471,8 +486,69 @@
         }
       },
       "MISC": {
-        "BESCHRIJVING": "Verplaatsingskosten",
-        "EENHEIDSPRIJS": 50,
+        "BESCHRIJVING": "wekelijkse opfrissing",
+        "EENHEIDSPRIJS": 60,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      }
+    }
+  },
+  "KOR": {
+    "NAAM": "GROEPSPRAKTIJK KORBEEK",
+    "AFKORTING": "KOR",
+    "BTWNUMMER": "BE0689.886.071",
+    "BTWPLICHTIG": true,
+    "BETALINGSTERMIJN": 31,
+    "ADRES": {
+      "STRAAT": "Tiensesteenweg",
+      "NUMMER": "100",
+      "BUS": "",
+      "POSTCODE": "3360",
+      "GEMEENTE": "Korbeek-Lo (Bierbeek) "
+    },
+    "DIENSTEN": {
+      "SCHOONMAAK": {
+        "BESCHRIJVING": "wekelijkse schoonmaak",
+        "EENHEIDSPRIJS": 110.0,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": true,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": true
+        }
+      },
+      "RAMEN": {
+        "BESCHRIJVING": "wekelijkse schoonmaak",
+        "EENHEIDSPRIJS": 70,
+        "EENHEID": "week",
+        "WERKTIJDEN_EENHEID": "volledige dagen",
+        "WERKTIJDEN": {
+          "MAANDAG": false,
+          "DINSDAG": false,
+          "WOENSDAG": false,
+          "DONDERDAG": false,
+          "VRIJDAG": false,
+          "ZATERDAG": false,
+          "ZONDAG": false
+        }
+      },
+      "MISC": {
+        "BESCHRIJVING": "extra schoonmaak",
+        "EENHEIDSPRIJS": 29.20,
         "EENHEID": "maand",
         "WERKTIJDEN_EENHEID": "volledige dagen",
         "WERKTIJDEN": {
