@@ -1,4 +1,3 @@
 {
-    "python.linting.enabled": true,
-    "python.pythonPath": "/Users/ynnck/.pyenv/versions/3.8.2/bin/python"
+    "python.linting.enabled": true
 }

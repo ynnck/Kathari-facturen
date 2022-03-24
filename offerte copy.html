@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
-    <!--<link rel="stylesheet" href="https://use.typekit.net/wcb2mjt.css">-->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet"> 
 
     <title>Factuur Clean&Co</title>
 <style>
@@ -32,8 +31,9 @@ body {
   font-family: var(--font-Playfair);
 }
 .logo {
-  width: 3in;
-  height: 0.5in;
+  color: var(--color-blue);
+  font-size: 43.5pt;
+  font-family: var(--font-Playfair);
 }
 #factuur{
   margin-bottom: 22.5pt;
@@ -140,51 +140,26 @@ h4 {
 </style>
 </head>
 <body>
-<div><img class='logo' src="./Kathari_factuur.png" /></div>
+<div class="logo">Clean & Co</div>
 <div>
 	{BEDRIJFSNAAM} <br/>
 	{ADRES}, {NUMMER} {BUS} <br/>
 	{POSTCODE} {GEMEENTE}
 </div>
 <div>
-<div class="sizeLarge" id="factuur">FACTUUR</div>
-<div class="factuurInfo">
-	<div class="col">
-		<div class="sizeLarge">Volgnummer</div>
-		<p class="info">{VOLGNUMMER}</p>
-	</div>
-	<div class="col">
-		<div class="sizeLarge">Factuurdatum</div>
-		<p class="info">{FACTUURDATUM}</p>
-	</div>
-	<div class="col">
-		<div class="sizeLarge">Vervaldatum</div>
-		<p class="info">{VERVALDATUM}</p>
-	</div>
-	<div class="col">
-		<div class="sizeLarge">Periode</div>
-		<p class="infoLaatste">{PERIODE}</p>
-	</div>
-</div>
-<div class="factuurRecords">
-	<div class="sizeLarge recordsCell">OMSCHRIJVING</div>
-	<div class="sizeLarge recordsCell">AANTAL</div>
-	<div class="sizeLarge recordsCell">PRIJS</div>
-	<div class="sizeLarge recordsCell">BTW</div>
-	<div class="sizeLarge recordsCell">SUBTOTAAL</div>
-	{RECORDS}
-</div>
-<div class="total">
-	<div class="sizeLarge recordsCell">Totaal excl BTW: </div>
-	<div class="sizeLarge recordsCell">&#8364; {BTW EXCLUSIEF}</div>
-	<div class="sizeLarge recordsCell">Totaal incl BTW: </div>
-	<div class="sizeLarge recordsCell">&#8364; {BTW INCLUSIEF}</div>
-</div>
+<p>Ik, Ljiljana Cvorovic, zaakvoerder van Kathari, bevestigt dat {{naam}} </p>
+
+</br></br>
+<p class="opgemaakt">Ljiljana Cvorovic,</p>
+</br></br></br></br>
+<p>Opgemaakt te Leuven op 12 september 2021 door </p>
+
 </div>
 <div class="footer">
-	<p class="opgemaakt">Opgemaakt te Leuven</p>
-	<p class="juridisch">Het protest tegen de factuur dient schriftelijk te gebeuren binnen de 8 dagen na factuurdatum. Men wordt verzocht steeds de datum en het nummer van de factuur te vermelden. In geval van betwisting is uitsluitend de rechtbank van Leuven bevoegd. De opdrachtgever verbindt er zich bij het toewijzen van een opdracht de factuur als betalingsuitnodiging te betalen tegen de vervaldatum zoals op de factuur vermeld. Hiervan kan enkel van afgeweken worden mits schriftelijke overeenkomst. Bij niet-betaling binnen de betalingstermijn zal de factuur verhoogd worden met 20% en met een minimum van 25EUR.</p>
-	<h3 class="algemeen">Ljiljana Cvorovic &#8212; 	Kesseldallaan 78/202, 3010 Leuven </br>BTW BE0703.928.505</br>IBAN BE03 3631 7885 3084</h3>
+	
+
+
+  <h3 class="algemeen">Ljiljana Cvorovic &#8212; Hulsberg 36, 3010 Kessel-Lo &#8212; BTW BE0703.928.505</br>IBAN BE03 3631 7885 3084</h3>
 </div>
 </body>
 </html> 
