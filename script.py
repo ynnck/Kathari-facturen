@@ -1,16 +1,15 @@
-import json
-import datetime
 import calendar
-import locale
-import generateInvoicePdf
-import query_yes_no
-import os
+import datetime
 import html
-
+import json
+import locale
+import os
 from collections import Counter
 
-locale.setlocale(locale.LC_ALL, "nl_BE")
+import generateInvoicePdf
+import query_yes_no
 
+locale.setlocale(locale.LC_ALL, "nl_BE")
 
 def getFirstDayOfMonth(date=datetime.date.today()):
     returndate = date.replace(day=1) if isinstance(date, datetime.date) else datetime.date.today()
@@ -145,6 +144,8 @@ FACTUUR = {"algemeen": {}, "records": []}
 
 # KEUZE BEDRIJF
 for bedrijf in data:
+    if not data[bedrijf]['ACTIEF']:
+        continue
     print("- {} (afkorting: {})".format(data[bedrijf]["NAAM"], bedrijf))
 input_company = inputValueAndCheck(
     "de afkorting van bedrijf waarvoor u een factuur wilt maken", "none", "str"
@@ -178,14 +179,14 @@ PERIOD = createStringPeriod(DATE_FROM, DATE_TO)
 DATE_INVOICE = DATE_TO
 
 DATE_START_PAYMENT = DATE_INVOICE if DATE_INVOICE > datetime.date.today() else datetime.date.today()
-DATE_PAYMENT = DATE_START_PAYMENT + datetime.timedelta(days=BEDRIJF["BETALINGSTERMIJN"])
+DATE_PAYMENT = DATE_START_PAYMENT + datetime.timedelta(days=BEDRIJF["BETALINGSTERMIJN"]) if not BEDRIJF['CONTANT'] else 'CONTANT'
 
 # FACTUURLIJNEN
 RECORDS = []
 for (key, rec) in BEDRIJF["DIENSTEN"].items():
     RECORD = {}
     RECORD["NUMBER_OF_WORKING_DAYS"] = inputValueAndCheck(
-        "aantal werkuren voor: {}".format(rec["BESCHRIJVING"]),
+        f"aantal werkuren voor: {rec['BESCHRIJVING']} ({rec['EENHEIDSPRIJS']})",
         calcNumberOfWorkingDays(
             rec["WERKTIJDEN_EENHEID"], rec["WERKTIJDEN"], DATE_FROM, DATE_TO,
         ),
@@ -235,7 +236,7 @@ if query_yes_no.ask_question("Wilt u de factuur afprinten?"):
         )
 
     VAT_EXPL = (
-        '<div class="footnote"><sup>1. Belasting te voldoen door de medecontractant, KB nr. 1, art. 20</sup></div>'
+        '<div class="footnote"><sup>Verlegging van heffing. Bij gebrek aan schriftelijke betwisting binnen een termijn van één maand na de ontvangst van de factuur, wordt de afnemer geacht te erkennen dat hij een belastingplichtige is gehouden tot de indiening van periodieke aangiften. Als die voorwaarde niet vervuld is, is de afnemer ten aanzien van die voorwaarde aansprakelijk voor de betaling van de verschuldigde belasting, intresten en geldboeten.</sup></div>'
         if VAT == 0
         else ""
     )
@@ -250,7 +251,7 @@ if query_yes_no.ask_question("Wilt u de factuur afprinten?"):
         "GEMEENTE": BEDRIJF["ADRES"]["GEMEENTE"],
         "VOLGNUMMER": str(REFERENCE).replace("/", "&#8725;"),
         "FACTUURDATUM": DATE_INVOICE.strftime("%d/%m/%Y"),
-        "VERVALDATUM": DATE_PAYMENT.strftime("%d/%m/%Y"),
+        "VERVALDATUM": DATE_PAYMENT.strftime("%d/%m/%Y") if not isinstance(DATE_PAYMENT, str) else DATE_PAYMENT,
         "PERIODE": str(PERIOD).replace(" ", "&nbsp;").replace("-", "&#45;"),
         "BTW EXCLUSIEF": TOTAL["btw exclusief"],
         "BTW INCLUSIEF": TOTAL["btw inclusief"],

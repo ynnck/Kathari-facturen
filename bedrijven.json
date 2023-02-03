@@ -3,8 +3,10 @@
         "NAAM": "Bosmans & Brusselmans BVBA",
         "AFKORTING": "BOS",
         "BTWNUMMER": "BE894.602.888",
+        "ACTIEF": false,
         "BTWPLICHTIG": false,
         "BETALINGSTERMIJN": 15,
+        "CONTANT": false,
         "ADRES": {
             "STRAAT": "L.E. Van Arenbergplein",
             "NUMMER": "8",
@@ -15,7 +17,7 @@
         "DIENSTEN": {
             "SCHOONMAAK": {
                 "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
-                "EENHEIDSPRIJS": 183.75,
+                "EENHEIDSPRIJS": 110,
                 "EENHEID": "week",
                 "WERKTIJDEN_EENHEID": "volledige dagen",
                 "WERKTIJDEN": {
@@ -64,8 +66,10 @@
         "NAAM": "Gnosis Mnemosyne BVBA",
         "AFKORTING": "PRO",
         "BTWNUMMER": "BE0458.069.731",
+        "ACTIEF": true,
         "BTWPLICHTIG": true,
         "BETALINGSTERMIJN": 31,
+        "CONTANT": false,
         "ADRES": {
             "STRAAT": "Maria-Theresiastraat ",
             "NUMMER": "85/1",
@@ -76,7 +80,7 @@
         "DIENSTEN": {
             "SCHOONMAAK": {
                 "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
-                "EENHEIDSPRIJS": 60,
+                "EENHEIDSPRIJS": 75,
                 "EENHEID": "week",
                 "WERKTIJDEN_EENHEID": "volledige dagen",
                 "WERKTIJDEN": {
@@ -125,8 +129,10 @@
         "NAAM": "Okio Oogkliniek VOF",
         "AFKORTING": "OKI",
         "BTWNUMMER": "BE0662.568.693",
+        "ACTIEF": false,
         "BTWPLICHTIG": true,
         "BETALINGSTERMIJN": 31,
+        "CONTANT": false,
         "ADRES": {
             "STRAAT": "Omleiding",
             "NUMMER": "93",
@@ -186,8 +192,10 @@
         "NAAM": "BeFit",
         "AFKORTING": "BEF",
         "BTWNUMMER": "BE0859.883.818",
+        "ACTIEF": true,
         "BTWPLICHTIG": true,
         "BETALINGSTERMIJN": 31,
+        "CONTANT": false,
         "ADRES": {
             "STRAAT": "Binkomstraat",
             "NUMMER": "3",
@@ -247,8 +255,10 @@
         "NAAM": "DUTSEL VOF",
         "AFKORTING": "DUT",
         "BTWNUMMER": "BE0666.997.437",
+        "ACTIEF": false,
         "BTWPLICHTIG": true,
         "BETALINGSTERMIJN": 31,
+        "CONTANT": false,
         "ADRES": {
             "STRAAT": "Dutselstraat",
             "NUMMER": "117",
@@ -308,8 +318,10 @@
         "NAAM": "PRAKTIJK 318 BVBA",
         "AFKORTING": "318",
         "BTWNUMMER": "BE0675.566.297",
+        "ACTIEF": true,
         "BTWPLICHTIG": true,
-        "BETALINGSTERMIJN": 31,
+        "BETALINGSTERMIJN": 15,
+        "CONTANT": false,
         "ADRES": {
             "STRAAT": "Tiensesteenweg",
             "NUMMER": "318",
@@ -320,7 +332,7 @@
         "DIENSTEN": {
             "SCHOONMAAK": {
                 "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
-                "EENHEIDSPRIJS": 125.0,
+                "EENHEIDSPRIJS": 192.5,
                 "EENHEID": "week",
                 "WERKTIJDEN_EENHEID": "volledige dagen",
                 "WERKTIJDEN": {
@@ -334,8 +346,8 @@
                 }
             },
             "RAMEN": {
-                "BESCHRIJVING": "schoonmaak ramen",
-                "EENHEIDSPRIJS": 50,
+                "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+                "EENHEIDSPRIJS": 137.5,
                 "EENHEID": "Uur",
                 "WERKTIJDEN_EENHEID": "volledige dagen",
                 "WERKTIJDEN": {
@@ -348,9 +360,24 @@
                     "ZONDAG": false
                 }
             },
+            "SCHOONMAAK2": {
+                "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+                "EENHEIDSPRIJS": 165,
+                "EENHEID": "week",
+                "WERKTIJDEN_EENHEID": "volledige dagen",
+                "WERKTIJDEN": {
+                    "MAANDAG": false,
+                    "DINSDAG": false,
+                    "WOENSDAG": false,
+                    "DONDERDAG": false,
+                    "VRIJDAG": false,
+                    "ZATERDAG": true,
+                    "ZONDAG": false
+                }
+            },
             "MISC": {
-                "BESCHRIJVING": "extra onderhoud",
-                "EENHEIDSPRIJS": 91,
+                "BESCHRIJVING": "extra schoonmaak kantoor",
+                "EENHEIDSPRIJS": 27.5,
                 "EENHEID": "week",
                 "WERKTIJDEN_EENHEID": "volledige dagen",
                 "WERKTIJDEN": {
@@ -369,8 +396,10 @@
         "NAAM": "CLEMY'S BVBA",
         "AFKORTING": "CLE",
         "BTWNUMMER": "BE0866.093.796",
+        "ACTIEF": false,
         "BTWPLICHTIG": false,
         "BETALINGSTERMIJN": 31,
+        "CONTANT": false,
         "ADRES": {
             "STRAAT": "Elisabethlaan",
             "NUMMER": "41",
@@ -445,8 +474,10 @@
         "NAAM": "BITEWING BV",
         "AFKORTING": "BIT",
         "BTWNUMMER": "BE0733.685.927",
+        "ACTIEF": true,
         "BTWPLICHTIG": true,
         "BETALINGSTERMIJN": 31,
+        "CONTANT": false,
         "ADRES": {
             "STRAAT": "Onze-Lieve-Vrouwstraat",
             "NUMMER": "13",
@@ -506,8 +537,10 @@
         "NAAM": "GROEPSPRAKTIJK KORBEEK",
         "AFKORTING": "KOR",
         "BTWNUMMER": "BE0689.886.071",
+        "ACTIEF": true,
         "BTWPLICHTIG": true,
         "BETALINGSTERMIJN": 31,
+        "CONTANT": false,
         "ADRES": {
             "STRAAT": "Tiensesteenweg",
             "NUMMER": "100",
@@ -548,7 +581,7 @@
             },
             "MISC": {
                 "BESCHRIJVING": "wekelijkse schoonmaak",
-                "EENHEIDSPRIJS": 90,
+                "EENHEIDSPRIJS": 40,
                 "EENHEID": "week",
                 "WERKTIJDEN_EENHEID": "volledige dagen",
                 "WERKTIJDEN": {
@@ -579,23 +612,58 @@
         }
     },
     "BMJ": {
-        "NAAM": "BVBA Bosmans Jean-Michel",
+        "NAAM": "BV Jean Michel Bosmans",
         "AFKORTING": "BMJ",
         "BTWNUMMER": "BE0460.765.836",
+        "ACTIEF": false,
         "BTWPLICHTIG": true,
         "BETALINGSTERMIJN": 30,
+        "CONTANT": true,
         "ADRES": {
-            "STRAAT": "L.E. Van Arenbergplein",
-            "NUMMER": "8",
+            "STRAAT": "Tiensevest",
+            "NUMMER": "24",
             "BUS": "",
-            "POSTCODE": "3001",
-            "GEMEENTE": "Leuven (Heverlee)"
+            "POSTCODE": "3000",
+            "GEMEENTE": "Leuven"
         },
         "DIENSTEN": {
             "SCHOONMAAK": {
-                "BESCHRIJVING": "wekelijkse schoonmaak",
-                "EENHEIDSPRIJS": 25,
+                "BESCHRIJVING": "schoonmaak",
+                "EENHEIDSPRIJS": 270,
                 "EENHEID": "uur",
+                "WERKTIJDEN_EENHEID": "volledige dagen",
+                "WERKTIJDEN": {
+                    "MAANDAG": false,
+                    "DINSDAG": false,
+                    "WOENSDAG": false,
+                    "DONDERDAG": false,
+                    "VRIJDAG": false,
+                    "ZATERDAG": false,
+                    "ZONDAG": true
+                }
+            }
+        }
+    },
+    "JMB": {
+        "NAAM": "Jean Michel Bosmans, Notaris",
+        "AFKORTING": "JMB",
+        "BTWNUMMER": "BE0785.862.524",
+        "ACTIEF": true,
+        "BTWPLICHTIG": false,
+        "BETALINGSTERMIJN": 15,
+        "CONTANT": true,
+        "ADRES": {
+            "STRAAT": "Tiensevest",
+            "NUMMER": "24",
+            "BUS": "",
+            "POSTCODE": "3000",
+            "GEMEENTE": "Leuven"
+        },
+        "DIENSTEN": {
+            "SCHOONMAAK": {
+                "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+                "EENHEIDSPRIJS": 165,
+                "EENHEID": "week",
                 "WERKTIJDEN_EENHEID": "volledige dagen",
                 "WERKTIJDEN": {
                     "MAANDAG": false,
@@ -613,8 +681,10 @@
         "NAAM": "BVBA Pitschon & Vangoidsenhoven",
         "AFKORTING": "PAT",
         "BTWNUMMER": "BE0841.449.066",
+        "ACTIEF": true,
         "BTWPLICHTIG": true,
         "BETALINGSTERMIJN": 30,
+        "CONTANT": false,
         "ADRES": {
             "STRAAT": "Torenstraat",
             "NUMMER": "55",
@@ -624,9 +694,108 @@
         },
         "DIENSTEN": {
             "SCHOONMAAK": {
-                "BESCHRIJVING": "wekelijkse schoonmaa",
+                "BESCHRIJVING": "wekelijkse schoonmaak",
                 "EENHEIDSPRIJS": 12.1,
                 "EENHEID": "uur",
+                "WERKTIJDEN_EENHEID": "volledige dagen",
+                "WERKTIJDEN": {
+                    "MAANDAG": false,
+                    "DINSDAG": false,
+                    "WOENSDAG": false,
+                    "DONDERDAG": false,
+                    "VRIJDAG": false,
+                    "ZATERDAG": false,
+                    "ZONDAG": true
+                }
+            }
+        }
+    },
+    "BRU": {
+        "NAAM": "Alexis Brusselmans Notaris",
+        "AFKORTING": "BRU",
+        "BTWNUMMER": "BE0785.582.412",
+        "ACTIEF": false,
+        "BTWPLICHTIG": false,
+        "BETALINGSTERMIJN": 15,
+        "CONTANT": false,
+        "ADRES": {
+            "STRAAT": "L.E. Van Arenbergplein",
+            "NUMMER": "8",
+            "BUS": "",
+            "POSTCODE": "3001",
+            "GEMEENTE": "Leuven (Heverlee)"
+        },
+        "DIENSTEN": {
+            "SCHOONMAAK": {
+                "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+                "EENHEIDSPRIJS": 110,
+                "EENHEID": "week",
+                "WERKTIJDEN_EENHEID": "volledige dagen",
+                "WERKTIJDEN": {
+                    "MAANDAG": false,
+                    "DINSDAG": false,
+                    "WOENSDAG": false,
+                    "DONDERDAG": false,
+                    "VRIJDAG": false,
+                    "ZATERDAG": false,
+                    "ZONDAG": true
+                }
+            }
+        }
+    },
+    "MED": {
+        "NAAM": "MediHerent",
+        "AFKORTING": "MED",
+        "BTWNUMMER": "BE0756.851.309",
+        "ACTIEF": true,
+        "BTWPLICHTIG": true,
+        "BETALINGSTERMIJN": 31,
+        "CONTANT": false,
+        "ADRES": {
+            "STRAAT": "Betlehemweg",
+            "NUMMER": "1/14",
+            "BUS": "",
+            "POSTCODE": "3020",
+            "GEMEENTE": "Herent"
+        },
+        "DIENSTEN": {
+            "SCHOONMAAK": {
+                "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+                "EENHEIDSPRIJS": 55,
+                "EENHEID": "week",
+                "WERKTIJDEN_EENHEID": "volledige dagen",
+                "WERKTIJDEN": {
+                    "MAANDAG": false,
+                    "DINSDAG": false,
+                    "WOENSDAG": true,
+                    "DONDERDAG": false,
+                    "VRIJDAG": false,
+                    "ZATERDAG": false,
+                    "ZONDAG": false
+                }
+            }
+        }
+    },
+    "AMP": {
+        "NAAM": "Amparo BV",
+        "AFKORTING": "AMP",
+        "BTWNUMMER": "BE0795.648.537",
+        "ACTIEF": true,
+        "BTWPLICHTIG": true,
+        "BETALINGSTERMIJN": 15,
+        "CONTANT": false,
+        "ADRES": {
+            "STRAAT": "Tiensesteenweg",
+            "NUMMER": "318",
+            "BUS": "",
+            "POSTCODE": "3000",
+            "GEMEENTE": "Leuven"
+        },
+        "DIENSTEN": {
+            "SCHOONMAAK": {
+                "BESCHRIJVING": "wekelijkse schoonmaak kantoor",
+                "EENHEIDSPRIJS": 150,
+                "EENHEID": "week",
                 "WERKTIJDEN_EENHEID": "volledige dagen",
                 "WERKTIJDEN": {
                     "MAANDAG": false,
