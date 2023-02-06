@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Invoice {{invoice_number}}</title>
+        <link href="style.css" rel="stylesheet" />
+        <meta name="description" content="Invoice" />
+    </head>
+    <body>
+        <header>
+            <img
+                src="/Users/ynnck/Git/kathari-facturen/templates/kathari.png"
+                alt="Kathari"
+            />
+        </header>
+        <div>
+            {{ customer.name}} <br />
+            {{ customer.vat_number }} <br />
+            {{ customer.address.street}}, {{ customer.address.number}} {{
+            customer.address.bus }} <br />
+            {{ customer.address.postal_code }} {{ customer.address.city }}
+        </div>
+        <div class="sizeLarge" id="factuur">FACTUUR</div>
+        <div class="table-line">
+            <div class="column-line">
+                <div class="sizeLarge">Volgnummer</div>
+                <div>{{ invoice_number }}</div>
+            </div>
+            <div class="column-line">
+                <div class="sizeLarge">Factuurdatum</div>
+                <div>{{invoice_date}}</div>
+            </div>
+            <div class="column-line">
+                <div class="sizeLarge">Vervaldatum</div>
+                <div>{{due_date}}</div>
+            </div>
+            <div class="column-line">
+                <div class="sizeLarge">Periode</div>
+                <div>{{period}}</div>
+            </div>
+        </div>
+
+        <div class="table">
+            <div class="row">
+                <div class="column first-column sizeLarge">OMSCHRIJVING</div>
+                <div class="column sizeLarge">AANTAL</div>
+                <div class="column sizeLarge">PRIJS</div>
+                <div class="column sizeLarge">BTW</div>
+                <div class="column sizeLarge">SUBTOTAAL</div>
+            </div>
+            {% for record in records %}
+            <div class="row">
+                <div class="column first-column margin-0">
+                    {{ record.service.description }}
+                </div>
+                <div class="column">{{ record.amount}}</div>
+                <div class="column">&#8364; {{record.service.unit_price}}</div>
+                <div class="column">{{record.service.vat}}</div>
+                <div class="column">&#8364; {{record.price}}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="total-container table">
+            <div class="row">
+                <div class="column sizeLarge">Totaal excl BTW:</div>
+                <div class="column sizeLarge">
+                    &#8364; {{total_vat_exclusive}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="column sizeLarge">Totaal incl BTW:</div>
+                <div class="column sizeLarge">
+                    &#8364; {{total_vat_inclusive}}
+                </div>
+            </div>
+        </div>
+        <p class="opgemaakt">Opgemaakt te Leuven</p>
+        <footer>
+            <p class="legal">
+                Het protest tegen de factuur dient schriftelijk te gebeuren
+                binnen de 8 dagen na factuurdatum. Men wordt verzocht steeds de
+                datum en het nummer van de factuur te vermelden. In geval van
+                betwisting is uitsluitend de rechtbank van Leuven bevoegd. De
+                opdrachtgever verbindt er zich bij het toewijzen van een
+                opdracht de factuur als betalingsuitnodiging te betalen tegen de
+                vervaldatum zoals op de factuur vermeld. Hiervan kan enkel van
+                afgeweken worden mits schriftelijke overeenkomst. Bij
+                niet-betaling binnen de betalingstermijn zal de factuur verhoogd
+                worden met 20% en met een minimum van 25EUR.
+            </p>
+            <h3 class="legal-general">
+                Ljiljana Cvorovic &#8212; Kesseldallaan 78/202, 3010 Leuven
+                <br />BTW BE0703.928.505<br />IBAN BE03 3631 7885 3084
+            </h3>
+        </footer>
+    </body>
+</html>

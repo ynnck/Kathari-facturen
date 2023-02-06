@@ -6,85 +6,10 @@ import locale
 import os
 from collections import Counter
 
-import generateInvoicePdf
-import query_yes_no
+import scripts.generateInvoicePdf as generateInvoicePdf
+import scripts.query_yes_no as query_yes_no
 
 locale.setlocale(locale.LC_ALL, "nl_BE")
-
-def getFirstDayOfMonth(date=datetime.date.today()):
-    returndate = date.replace(day=1) if isinstance(date, datetime.date) else datetime.date.today()
-    if not isinstance(date, datetime.date):
-        print(
-            "ingevoerde datum is geen datetime.date, \
-            datum van vandaag werd gereturned"
-        )
-    return returndate
-
-
-def getLastDayOfMonth(date=datetime.date.today()):
-    returndate = (
-        datetime.date(date.year, date.month, calendar.monthrange(date.year, date.month)[1])
-        if isinstance(date, datetime.date)
-        else datetime.date.today()
-    )
-    if not isinstance(date, datetime.date):
-        print(
-            "ingevoerde datum is geen datetime.date, \
-            datum van vandaag werd gereturned"
-        )
-    return returndate
-
-
-def calcNumberOfDaysInMonth(date_from, date_to):
-    days = Counter()
-
-    for i in range((date_to - date_from).days + 1):
-        days[(date_from + datetime.timedelta(i)).strftime("%A")] += 1
-    return days
-
-
-def calcNumberOfWorkingDays(unit, schedule, date_from, date_to):
-    days_in_period = calcNumberOfDaysInMonth(date_from, date_to)
-    number_of_work_units = 0
-
-    if unit == "volledige dagen":
-        workdays = [key.lower() for (key, value) in schedule.items() if value]
-        number_of_work_units = (
-            round(sum(days_in_period[day] / len(workdays) for day in workdays) * 2) / 2
-        )
-    #elif unit == "uren":
-    # if werktijdenEenheid=='deeltijdse dagen':
-
-    return number_of_work_units
-
-
-def createStringPeriod(date_from, date_to):
-    period = ""
-    if date_from == getFirstDayOfMonth(date_from) and date_to == getLastDayOfMonth(
-        date_to
-    ):
-        period = date_from.strftime("%B %Y")
-    elif date_from.strftime("%m%y") == date_to.strftime("%m%y"):
-        period = "{} - {} {}".format(
-            date_from.strftime("%d"),
-            date_to.strftime("%d"),
-            date_from.strftime("%B %Y"),
-        )
-    else:
-        period = "{} - {}".format(
-            date_from.strftime("%d %B %Y"), date_to.strftime("%d %B %Y")
-        )
-    return period
-
-
-def calcTotalAmount(records, btw=21):
-    excl = round(sum(rec["AMOUNT"] for rec in records), 2) if records else 0
-    incl = (
-        round(sum((rec["AMOUNT"] * ((100 + rec["VAT"]) / 100)) for rec in records), 2,)
-        if records
-        else 0
-    )
-    return {"btw exclusief": excl, "btw inclusief": incl}
 
 
 def inputValueAndCheck(description, value_standard, extension):
@@ -144,7 +69,7 @@ FACTUUR = {"algemeen": {}, "records": []}
 
 # KEUZE BEDRIJF
 for bedrijf in data:
-    if not data[bedrijf]['ACTIEF']:
+    if not data[bedrijf]["ACTIEF"]:
         continue
     print("- {} (afkorting: {})".format(data[bedrijf]["NAAM"], bedrijf))
 input_company = inputValueAndCheck(
@@ -173,22 +98,33 @@ DATE_FROM = inputValueAndCheck(
 )
 
 DATE_TO = inputValueAndCheck(
-    "einddatum factuurperiode (in formaat: jaar-maand-dag)", getLastDayOfMonth(date=DATE_FROM), "datetime",
+    "einddatum factuurperiode (in formaat: jaar-maand-dag)",
+    getLastDayOfMonth(date=DATE_FROM),
+    "datetime",
 )
 PERIOD = createStringPeriod(DATE_FROM, DATE_TO)
 DATE_INVOICE = DATE_TO
 
-DATE_START_PAYMENT = DATE_INVOICE if DATE_INVOICE > datetime.date.today() else datetime.date.today()
-DATE_PAYMENT = DATE_START_PAYMENT + datetime.timedelta(days=BEDRIJF["BETALINGSTERMIJN"]) if not BEDRIJF['CONTANT'] else 'CONTANT'
+DATE_START_PAYMENT = (
+    DATE_INVOICE if DATE_INVOICE > datetime.date.today() else datetime.date.today()
+)
+DATE_PAYMENT = (
+    DATE_START_PAYMENT + datetime.timedelta(days=BEDRIJF["BETALINGSTERMIJN"])
+    if not BEDRIJF["CONTANT"]
+    else "CONTANT"
+)
 
 # FACTUURLIJNEN
 RECORDS = []
-for (key, rec) in BEDRIJF["DIENSTEN"].items():
+for key, rec in BEDRIJF["DIENSTEN"].items():
     RECORD = {}
     RECORD["NUMBER_OF_WORKING_DAYS"] = inputValueAndCheck(
         f"aantal werkuren voor: {rec['BESCHRIJVING']} ({rec['EENHEIDSPRIJS']})",
         calcNumberOfWorkingDays(
-            rec["WERKTIJDEN_EENHEID"], rec["WERKTIJDEN"], DATE_FROM, DATE_TO,
+            rec["WERKTIJDEN_EENHEID"],
+            rec["WERKTIJDEN"],
+            DATE_FROM,
+            DATE_TO,
         ),
         "float",
     )
@@ -245,23 +181,26 @@ if query_yes_no.ask_question("Wilt u de factuur afprinten?"):
     dataInvoice = {
         "BEDRIJFSNAAM": BEDRIJF["NAAM"],
         "ADRES": BEDRIJF["ADRES"]["STRAAT"],
+        "BTWNUMMER": BEDRIJF["BTWNUMMER"],
         "NUMMER": BEDRIJF["ADRES"]["NUMMER"],
         "BUS": BEDRIJF["ADRES"]["BUS"],
         "POSTCODE": BEDRIJF["ADRES"]["POSTCODE"],
         "GEMEENTE": BEDRIJF["ADRES"]["GEMEENTE"],
         "VOLGNUMMER": str(REFERENCE).replace("/", "&#8725;"),
         "FACTUURDATUM": DATE_INVOICE.strftime("%d/%m/%Y"),
-        "VERVALDATUM": DATE_PAYMENT.strftime("%d/%m/%Y") if not isinstance(DATE_PAYMENT, str) else DATE_PAYMENT,
+        "VERVALDATUM": DATE_PAYMENT.strftime("%d/%m/%Y")
+        if not isinstance(DATE_PAYMENT, str)
+        else DATE_PAYMENT,
         "PERIODE": str(PERIOD).replace(" ", "&nbsp;").replace("-", "&#45;"),
         "BTW EXCLUSIEF": TOTAL["btw exclusief"],
         "BTW INCLUSIEF": TOTAL["btw inclusief"],
         "RECORDS": recordsInvoice,
     }
     nameInvoice = "factuur_{}_{:04d}_{}.pdf".format(
-        DATE_INVOICE.strftime("%Y"), settings["TELLER"], BEDRIJF["AFKORTING"],
+        DATE_INVOICE.strftime("%Y"),
+        settings["TELLER"],
+        BEDRIJF["AFKORTING"],
     )
-    generateInvoicePdf.write(data=dataInvoice, saveName=nameInvoice, folder='Facturen')
+    generateInvoicePdf.write(data=dataInvoice, saveName=nameInvoice, folder="Facturen")
 
-with open(os.path.join(script_dir, "settings.json"), "w") as write_file:
-    settings["TELLER"] += 1
-    json.dump(settings, write_file, indent=4)
+

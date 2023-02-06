@@ -2,15 +2,24 @@
 name = "kathari-facturen"
 version = "0.1.0"
 description = ""
-authors = ["Yannick Lenaerts <ylenaerts89@gmail.com>"]
+authors = ["ynnck <ylenaerts89@gmail.com>"]
+readme = "README.md"
+packages = [{include = "kathari_facturen"}]
 
 [tool.poetry.dependencies]
-python = "~3.9"
-weasyprint = "^54.2"
-pycairo = "^1.21.0"
+python = "^3.11"
+weasyprint = "^57.2"
+pycairo = "^1.23.0"
+pydantic = "^1.10.4"
+click = "^8.1.3"
+jinja2 = "^3.1.2"
 
-[tool.poetry.dev-dependencies]
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+mypy = "^0.991"
+devtools = "^0.10.0"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

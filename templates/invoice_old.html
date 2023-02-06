@@ -134,36 +134,37 @@ h4 {
   color: var(--color-blue);
 }
 .footnote{
-	width: 97%;
-	text-align: end;
+  color: lightgray;
+  font-size: 5pt;
 }
 </style>
 </head>
 <body>
-<div><img class='logo' src="./Kathari_factuur.png" /></div>
+<div><img class='logo' src="kathari.png" alt="Kathari"/></div>
 <div>
-	{BEDRIJFSNAAM} <br/>
-	{ADRES}, {NUMMER} {BUS} <br/>
-	{POSTCODE} {GEMEENTE}
+	{{ customer.name}} <br/>
+  {{ customer.vat_number }} <br />
+	{{ customer.address.street}}, {{ customer.address.number}} {{ customer.address.bus }} <br/>
+	{{ customer.address.postal_code }} {{ customer.address.city }}
 </div>
 <div>
 <div class="sizeLarge" id="factuur">FACTUUR</div>
 <div class="factuurInfo">
 	<div class="col">
 		<div class="sizeLarge">Volgnummer</div>
-		<p class="info">{VOLGNUMMER}</p>
+		<p class="info">{{ invoice_number }}</p>
 	</div>
 	<div class="col">
 		<div class="sizeLarge">Factuurdatum</div>
-		<p class="info">{FACTUURDATUM}</p>
+		<p class="info">{{invoice_date}}</p>
 	</div>
 	<div class="col">
 		<div class="sizeLarge">Vervaldatum</div>
-		<p class="info">{VERVALDATUM}</p>
+		<p class="info">{{due_date}}</p>
 	</div>
 	<div class="col">
 		<div class="sizeLarge">Periode</div>
-		<p class="infoLaatste">{PERIODE}</p>
+		<p class="infoLaatste">{{period}}</p>
 	</div>
 </div>
 <div class="factuurRecords">
@@ -172,13 +173,21 @@ h4 {
 	<div class="sizeLarge recordsCell">PRIJS</div>
 	<div class="sizeLarge recordsCell">BTW</div>
 	<div class="sizeLarge recordsCell">SUBTOTAAL</div>
-	{RECORDS}
+	{% for record in records %}
+  <div class='recordsCell'>{{ record.service.description }}</div>
+  <div class='recordsCell'>{{ record.amount}}</div>
+  <div class='recordsCell'>&#8364 {{record.service.unit_price}}</div>
+  <div class='recordsCell'>{{record.service.vat}}</div>
+  <div class='recordsCell'>&#8364 {{record.price}}</div>
+  {% endfor %}
+
+  <div class="footnote"><sup>{{verlegging_text}}</sup></div>
 </div>
 <div class="total">
 	<div class="sizeLarge recordsCell">Totaal excl BTW: </div>
-	<div class="sizeLarge recordsCell">&#8364; {BTW EXCLUSIEF}</div>
+	<div class="sizeLarge recordsCell">&#8364; {{total_vat_exclusive}}</div>
 	<div class="sizeLarge recordsCell">Totaal incl BTW: </div>
-	<div class="sizeLarge recordsCell">&#8364; {BTW INCLUSIEF}</div>
+	<div class="sizeLarge recordsCell">&#8364; {{total_vat_inclusive}}</div>
 </div>
 </div>
 <div class="footer">
