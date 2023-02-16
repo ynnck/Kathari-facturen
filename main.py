@@ -1,5 +1,6 @@
 import json
 import locale
+from decimal import Decimal
 
 import click
 from devtools import debug
@@ -71,20 +72,43 @@ def cli() -> None:
     invoice.invoice_number = invoice_number
 
     ### Iterate Service Lines
-    for service_line in selected_customer.service_list:
-        amount = click.prompt(
-            f"{service_line.description} (price: {service_line.unit_price} / {service_line.unit})",
+    for i, service_line in enumerate(selected_customer.service_list, 1):
+        click.echo(
+            f"{i}. {service_line.description} (price: {service_line.unit_price} / {service_line.unit})"
+        )
+
+    while True:
+        number = click.prompt(
+            'Please enter the name of the service line you want to add to the invoice. Type "0" to stop adding service lines.',
             type=int,
             default=0,
         )
+        chosen_service_line = selected_customer.service_list[number - 1]
+        if number == 0:
+            break
+
+        amount = click.prompt(
+            f"{chosen_service_line.description} (price: {chosen_service_line.unit_price} / {chosen_service_line.unit})",
+            type=float,
+            default=0,
+        )
+        amount_decimal = round(Decimal(amount), 2)
+
         if amount:
-            invoice_record = InvoiceRecord(service=service_line, amount=amount)
+            comment = click.prompt(
+                "Specify extra info on the invoice line.", type=str, default=""
+            )
+            invoice_record = InvoiceRecord(
+                service=chosen_service_line,
+                amount=amount_decimal,
+                comment=comment,
+            )
             invoice.records.append(invoice_record)
 
-    debug(invoice)
     ### Save Invoice To File
     invoice.save_to_file(
         template=company.template,
+        template_css=company.template_css,
         path=f'output/{company.name.lower()}/factuur_{invoice.invoice_date.strftime("%Y")}_{invoice.counter}_{invoice.customer.abbreviation}.pdf',
     )
 

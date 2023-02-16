@@ -8,10 +8,12 @@ from .customers import Customer
 class Company(BaseModel):
     name: str
     template: str
+    template_css: str
     customers: list[Customer] = []
     standard_vat_tariff: int
     counter: int
     verlegging_text: str
+
 
     def get_active_customers(self) -> list[Customer]:
         return [customer for customer in self.customers if customer.active]

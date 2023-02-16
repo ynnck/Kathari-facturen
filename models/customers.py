@@ -17,6 +17,8 @@ class Service(BaseModel):
     unit: str
     vat: Decimal = Decimal(21)
 
+
+
     @validator("unit_price")
     def unit_price_cannot_be_negative(cls, v, values, **kwargs):
         if v < 0:
@@ -41,6 +43,8 @@ class Customer(BaseModel):
     address: Address
     service_list: list[Service] = []
 
+
+            
     @validator("payment_term")
     def payment_term_cannot_be_negative(cls, v, values, **kwargs):
         if v < 0:

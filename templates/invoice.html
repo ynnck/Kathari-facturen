@@ -51,7 +51,8 @@
             {% for record in records %}
             <div class="row">
                 <div class="column first-column margin-0">
-                    {{ record.service.description }}
+                    {{ record.service.description }}{% if record.service.description != "" %}
+                    : {{record.service.description}}{% endif %}
                 </div>
                 <div class="column">{{ record.amount}}</div>
                 <div class="column">&#8364; {{record.service.unit_price}}</div>
