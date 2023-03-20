@@ -67,9 +67,17 @@ def cli() -> None:
 
     ### Select invoice number
     invoice_number = click.prompt(
-        "Set invoice number", default=invoice.invoice_number, type=str
+        "Set invoice number",
+        default=invoice.invoice_number,
+        type=str,
     )
-    invoice.invoice_number = invoice_number
+
+    ### Select invoice date
+    invoice_date = click.prompt(
+        "Set invoice date",
+        default=invoice.invoice_date,
+        type=click.DateTime(["%Y/%m/%d", "%Y-%m-%d"]),
+    )
 
     ### Iterate Service Lines
     for i, service_line in enumerate(selected_customer.service_list, 1):
@@ -77,6 +85,7 @@ def cli() -> None:
             f"{i}. {service_line.description} (price: {service_line.unit_price} / {service_line.unit})"
         )
 
+    input_records = []
     while True:
         number = click.prompt(
             'Please enter the name of the service line you want to add to the invoice. Type "0" to stop adding service lines.',
@@ -103,7 +112,15 @@ def cli() -> None:
                 amount=amount_decimal,
                 comment=comment,
             )
-            invoice.records.append(invoice_record)
+            input_records.append(invoice_record)
+
+    invoice = Invoice(
+        customer=selected_customer,
+        counter=company.counter,
+        invoice_date=invoice_date,
+        invoice_number=invoice_number,
+        records=input_records,
+    )
 
     ### Save Invoice To File
     invoice.save_to_file(
@@ -134,8 +151,8 @@ def cli() -> None:
 
     # Check if company Exists
     company_invoice: CompanyInvoiceRegistry | None = None
-    if not invoice_registry.check_if_company_exists(company.name):
-        company_invoice = CompanyInvoiceRegistry(company=company)
+    if not invoice_registry.check_if_company_exists(company=company.name):
+        company_invoice = CompanyInvoiceRegistry(company_name=company.name)
         invoice_registry.companies.append(company_invoice)
 
     company_invoice = invoice_registry.get_registry_by_company_name(company.name)

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Invoice {{invoice_number}}</title>
-        <link href="style.css" rel="stylesheet" />
+        <link href="invoice.css" rel="stylesheet" />
         <meta name="description" content="Invoice" />
     </head>
     <body>
@@ -32,7 +32,10 @@
             </div>
             <div class="column-line">
                 <div class="sizeLarge">Vervaldatum</div>
-                <div>{{due_date}}</div>
+                <div>
+                    {%if customer.cash%} Contant {% else %} {{due_date}} {%
+                    endif %}
+                </div>
             </div>
             <div class="column-line">
                 <div class="sizeLarge">Periode</div>
@@ -51,28 +54,43 @@
             {% for record in records %}
             <div class="row">
                 <div class="column first-column margin-0">
-                    {{ record.service.description }}{% if record.service.description != "" %}
-                    : {{record.service.description}}{% endif %}
+                    {{ record.service.description }}{% if record.service.comment
+                    and record.service.comment != "" %} :
+                    {{record.service.comment}}{% endif %}
                 </div>
                 <div class="column">{{ record.amount}}</div>
                 <div class="column">&#8364; {{record.service.unit_price}}</div>
-                <div class="column">{{record.service.vat}}</div>
+                <div class="column">
+                    {{record.service.vat}}{% if not customer.vat_required
+                    %}<sup>*</sup>{%endif%}
+                </div>
                 <div class="column">&#8364; {{record.price}}</div>
             </div>
             {% endfor %}
         </div>
+        {% if not customer.vat_required %}
+        <div class="footnote">
+            <sup>*</sup>Verlegging van heffing. Bij gebrek aan schriftelijke
+            betwisting binnen een termijn van een maand na de ontvangst van de
+            factuur, wordt de afnemer geacht te erkennen dat hij een
+            belastingplichtige is gehouden tot de indiening van periodieke
+            aangiften. Als die voorwaarde niet vervuld is, is de afnemer ten
+            aanzien van die voorwaarde aansprakelijk voor de betaling van de
+            verschuldigde belasting, intresten en geldboeten.
+        </div>
+        {% endif%}
 
         <div class="total-container table">
             <div class="row">
                 <div class="column sizeLarge">Totaal excl BTW:</div>
                 <div class="column sizeLarge">
-                    &#8364; {{total_vat_exclusive}}
+                    &#8364; {{total_vat_excluded}}
                 </div>
             </div>
             <div class="row">
                 <div class="column sizeLarge">Totaal incl BTW:</div>
                 <div class="column sizeLarge">
-                    &#8364; {{total_vat_inclusive}}
+                    &#8364; {{total_vat_included}}
                 </div>
             </div>
         </div>

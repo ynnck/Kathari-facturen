@@ -14,91 +14,69 @@ class InvoiceRecord(BaseModel):
     service: Service
     comment: str = ""
     amount: Decimal = Decimal(0)
-    price: Decimal = Decimal(0)
-    price_vat_included: Decimal = Decimal(0)
 
-    class Config:
-        validate_assignment = True
+    @property
+    def price(self) -> Decimal:
+        return round(self.service.unit_price * self.amount, 2)
 
-    @validator("price", pre=True, always=True)
-    def price_validator(cls, v, values) -> Decimal:
-        service = values["service"]
-        amount = values["amount"]
-        return service.unit_price * amount
+    @property
+    def price_vat_included(self) -> Decimal:
+        return round(self.price * (1 + (self.service.vat / 100)), 2)
 
-    @validator("price_vat_included", pre=True, always=True)
-    def price_vat_included_validator(cls, v, values) -> Decimal:
-        service = values["service"]
-        price = values["price"]
-        return price * (1 + (service.vat / 100))
+    def dict(self, *args, **kwargs) -> dict[str, Any]:
+        values = super().dict(*args, **kwargs)
+        values["price"] = self.price
+        values["price_vat_included"] = self.price_vat_included
+        return values
 
 
 class Invoice(BaseModel):
     customer: Customer
     counter: int
-    invoice_date: date = Field(default_factory=lambda: date.today())
-    due_date: Optional[date] = None
-    period: Optional[str] = None
-    invoice_number: Optional[str] = None
     records: list[InvoiceRecord] = []
-    total_vat_excluded: Decimal = Decimal(0)
-    total_vat_included: Decimal = Decimal(0)
+    invoice_date: date = Field(default_factory=lambda: date.today())
 
-    class Config:
-        validate_assignment = True
+    @property
+    def due_date(self) -> date:
+        return self.invoice_date + timedelta(days=self.customer.payment_term)
 
-    @validator("invoice_date", pre=True, always=True)
-    def invoice_date_validator(cls, v, values) -> date:
-        if isinstance(v, str):
-            return datetime.strptime(v, "%Y-%m-%d").date()
-        if isinstance(v, date):
-            return v
+    @property
+    def period(self) -> str:
+        return self.invoice_date.strftime("%B %Y")
 
-        return date.today()
-
-    @validator("due_date", pre=True, always=True)
-    def due_date_validator(cls, v, values) -> date:
-        due_date = v
-
-        if not due_date:
-            due_date = values["invoice_date"] + timedelta(
-                days=values["customer"].payment_term
-            )
-        if isinstance(v, str):
-            due_date = datetime.strptime(v, "%Y-%m-%d").date()
-
-        if due_date < values["invoice_date"]:
-            raise ValidationError("due date cannot be before invoice date")
-
-        return due_date
-
-    @validator("period", pre=True, always=True)
-    def period_validator(cls, v, values) -> str:
-        return values["invoice_date"].strftime("%B %Y")
-
-    @validator("invoice_number", pre=True, always=True)
-    def invoice_number_validator(cls, v, values) -> str:
-        if not v:
-            return f"{values['invoice_date'].year}/{values['customer'].abbreviation}/{values['counter']:04d}"
-
-        return v
-
-    @validator("total_vat_excluded", pre=True, always=True)
-    def total_vat_excluded_validator(cls, v, values) -> Decimal:
-        return Decimal(sum([rec.price for rec in values["records"]]))
-
-    @validator("total_vat_included", pre=True, always=True)
-    def total_vat_included_validator(cls, v, values) -> Decimal:
-        total_vat_included = Decimal(
-            sum([rec.price_vat_included for rec in values["records"]])
+    @property
+    def invoice_number(self) -> str:
+        return (
+            f"{self.invoice_date.year}/{self.customer.abbreviation}/{self.counter:04d}"
         )
 
-        if total_vat_included < values["total_vat_excluded"]:
+    @property
+    def total_vat_excluded(self) -> Decimal:
+        return round(Decimal(sum([rec.price for rec in self.records])), 2)
+
+    @property
+    def total_vat_included(self) -> Decimal:
+        total_vat_included = Decimal(
+            sum([rec.price_vat_included for rec in self.records])
+        )
+
+        if total_vat_included < self.total_vat_excluded:
             raise ValidationError(
                 "Total including VAT cannot be smaller than total Excluding VAT"
             )
+        return round(Decimal(total_vat_included), 2)
 
-        return total_vat_included
+    def dict(self, *args, **kwargs) -> dict[str, Any]:
+        values = super().dict(*args, **kwargs)
+        values["invoice_number"] = self.invoice_number
+        values["due_date"] = self.due_date
+        values["period"] = self.period
+        values["total_vat_excluded"] = self.total_vat_excluded
+        values["total_vat_included"] = self.total_vat_included
+        return values
+
+    class Config:
+        validate_assignment = True
 
     def parse_html_file(
         self,
@@ -110,7 +88,11 @@ class Invoice(BaseModel):
         template = env.get_template(path)
         css = env.get_template(path_css)
 
-        html = template.render(**self.dict())
+        html = template.render(
+            {
+                **self.dict(),
+            }
+        )
         css_html = css.render()
 
         return html, css_html

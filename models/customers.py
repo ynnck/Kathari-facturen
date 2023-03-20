@@ -13,11 +13,9 @@ class Address(BaseModel):
 
 class Service(BaseModel):
     description: str
-    unit_price: Decimal = Decimal(0)
+    unit_price: Decimal
     unit: str
-    vat: Decimal = Decimal(21)
-
-
+    vat: Decimal
 
     @validator("unit_price")
     def unit_price_cannot_be_negative(cls, v, values, **kwargs):
@@ -37,14 +35,19 @@ class Customer(BaseModel):
     abbreviation: str
     active: bool = True
     vat_number: str
-    vat_required: bool = True
     payment_term: int = 30
     cash: bool = False
     address: Address
     service_list: list[Service] = []
+    vat_required: bool = True
 
+    # @validator("vat_required", always=True)
+    # def vat_required_validator(cls, v, values, **kwargs):
+    #     has_vat_services = any([s.vat > 0 for s in values["service_list"]])
+    #     if not v and has_vat_services:
+    #         raise ValidationError("VAT required if any service has VAT")
+    #     return v
 
-            
     @validator("payment_term")
     def payment_term_cannot_be_negative(cls, v, values, **kwargs):
         if v < 0:
