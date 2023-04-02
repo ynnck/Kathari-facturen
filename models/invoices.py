@@ -14,6 +14,7 @@ class InvoiceRecord(BaseModel):
     service: Service
     comment: str = ""
     amount: Decimal = Decimal(0)
+    vat: Decimal = Decimal("21")
 
     @property
     def price(self) -> Decimal:
@@ -21,7 +22,7 @@ class InvoiceRecord(BaseModel):
 
     @property
     def price_vat_included(self) -> Decimal:
-        return round(self.price * (1 + (self.service.vat / 100)), 2)
+        return round(self.price * (1 + (self.vat / 100)), 2)
 
     def dict(self, *args, **kwargs) -> dict[str, Any]:
         values = super().dict(*args, **kwargs)
@@ -32,9 +33,20 @@ class InvoiceRecord(BaseModel):
 
 class Invoice(BaseModel):
     customer: Customer
-    counter: int
     records: list[InvoiceRecord] = []
+    invoice_number: str = ""
     invoice_date: date = Field(default_factory=lambda: date.today())
+
+    @validator("invoice_number")
+    def invoice_number_separates(cls, v: str, values, **kwargs):
+        if len(v.split("/")) != 3:
+            raise ValidationError("Invoice number must contain 2 '/' slashes")
+        return v
+
+    @property
+    def invoice_index(self) -> int:
+        invoice_number_list = self.invoice_number.split("/")
+        return int(invoice_number_list[2])
 
     @property
     def due_date(self) -> date:
@@ -43,12 +55,6 @@ class Invoice(BaseModel):
     @property
     def period(self) -> str:
         return self.invoice_date.strftime("%B %Y")
-
-    @property
-    def invoice_number(self) -> str:
-        return (
-            f"{self.invoice_date.year}/{self.customer.abbreviation}/{self.counter:04d}"
-        )
 
     @property
     def total_vat_excluded(self) -> Decimal:
@@ -66,9 +72,14 @@ class Invoice(BaseModel):
             )
         return round(Decimal(total_vat_included), 2)
 
+    def get_default_invoice_number(self, counter: int) -> str:
+        return (
+            f"{self.invoice_date.year}/{self.customer.abbreviation}/{counter:04d}"
+        )
+
     def dict(self, *args, **kwargs) -> dict[str, Any]:
         values = super().dict(*args, **kwargs)
-        values["invoice_number"] = self.invoice_number
+        values["invoice_index"] = self.invoice_index
         values["due_date"] = self.due_date
         values["period"] = self.period
         values["total_vat_excluded"] = self.total_vat_excluded

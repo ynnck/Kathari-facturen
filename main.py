@@ -68,7 +68,7 @@ def cli() -> None:
     ### Select invoice number
     invoice_number = click.prompt(
         "Set invoice number",
-        default=invoice.invoice_number,
+        default=invoice.get_default_invoice_number(company.counter),
         type=str,
     )
 
@@ -111,6 +111,9 @@ def cli() -> None:
                 service=chosen_service_line,
                 amount=amount_decimal,
                 comment=comment,
+                vat=selected_customer.service_list[number - 1].vat
+                if selected_customer.vat_required
+                else 0,
             )
             input_records.append(invoice_record)
 
@@ -126,11 +129,12 @@ def cli() -> None:
     invoice.save_to_file(
         template=company.template,
         template_css=company.template_css,
-        path=f'output/{company.name.lower()}/factuur_{invoice.invoice_date.strftime("%Y")}_{invoice.counter}_{invoice.customer.abbreviation}.pdf',
+        path=f'output/{company.name.lower()}/factuur_{invoice.invoice_date.strftime("%Y")}_{invoice.invoice_index}_{invoice.customer.abbreviation}.pdf',
     )
 
-    ### Increase counter
-    company.counter += 1
+    ### Increase counter only if invoice number is default
+    if str(company.counter) in invoice_number:
+        company.counter += 1
 
     ### Save Database to File
     database_dict = database.dict()
