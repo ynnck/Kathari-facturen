@@ -1,4 +1,4 @@
 /Facturen
 __pycache
 .vscode
-*.pdf
+# *.pdf
