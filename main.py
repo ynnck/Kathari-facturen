@@ -3,7 +3,6 @@ import locale
 from decimal import Decimal
 
 import click
-from devtools import debug
 
 from models.companies import Company
 from models.database import Database
@@ -15,7 +14,7 @@ from models.invoices import (
 )
 from scripts.json_utils import DecimalEncoder
 
-locale.setlocale(locale.LC_ALL, "nl_BE")
+locale.setlocale(locale.LC_ALL, "nl_BE.UTF-8")
 
 
 def validate_company(value, number_of_companies) -> int:
