@@ -1,12 +1,17 @@
 # Script voor genenereren facturen pdf
+
 ## TODO
+
 - Facturen is lijst met json, maar enkel laatste wordt bijgehouden op dit moment, moet geappend worden
+
 ## files
+
 - scriptInvoice.py: eigenlijke scriptfile
 - generateInvoice.py: module om data om te zetten in een pdf
 - settings.json: bestand met settings
 
 ### bedrijven.json: velden
+
 ```json
 "BOS": {
     "NAAM": "",
@@ -72,20 +77,23 @@
 ```
 
 ### generateInvoice: Input
+
 - data: object
-    {zoek: vervang}
-    de key wordt gezocht in de template en vervangen door de value
-    standaard: '{"default": "default"}'
+  {zoek: vervang}
+  de key wordt gezocht in de template en vervangen door de value
+  standaard: '{"default": "default"}'
 - saveName: string
-    relatief pad voor opslagen document
-    standaard: "temp.pdf"
+  relatief pad voor opslagen document
+  standaard: "temp.pdf"
 - html: string
-    relatief pad voor template
-    standaard: "invoice.html"
+  relatief pad voor template
+  standaard: "invoice.html"
 
 ### settings: velden
+
 - BTWPERCENTAGE: percentage voor btw, in Belgie 21%
 - teller: nummer voor de volgnummer
 
-### facturen: 
+### facturen:
+
 json file met alle facturen in

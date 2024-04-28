@@ -1,84 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Invoice {{invoice_number}}</title>
-        <link href="reroot.css" rel="stylesheet" />
-        <meta name="description" content="Invoice" />
-        <link rel="stylesheet" href="https://use.typekit.net/wrq8guh.css" />
-    </head>
-    <body>
-        <header class="logo">re:root</header>
-        <div>
-            {{ customer.name}} <br />
-            {{ customer.vat_number }} <br />
-            {{ customer.address.street}}, {{ customer.address.number}} {{
-            customer.address.bus }} <br />
-            {{ customer.address.postal_code }} {{ customer.address.city }}
-        </div>
-        <div class="sizeLarge" id="factuur">INVOICE</div>
-        <div class="table-line">
-            <div class="column-line">
-                <div class="sizeLarge">Invoice Number</div>
-                <div>{{ invoice_number }}</div>
-            </div>
-            <div class="column-line">
-                <div class="sizeLarge">Invoice Date</div>
-                <div>{{invoice_date}}</div>
-            </div>
-            <div class="column-line">
-                <div class="sizeLarge">Due Date</div>
-                <div>{{due_date}}</div>
-            </div>
-            <div class="column-line">
-                <div class="sizeLarge">Period</div>
-                <div>{{period}}</div>
-            </div>
-        </div>
+  <head>
+    <meta charset="utf-8" />
+    <title>Invoice {{invoice_number}}</title>
+    <link href="reroot.css" rel="stylesheet" />
+    <meta name="description" content="Invoice" />
+    <link rel="stylesheet" href="https://use.typekit.net/wrq8guh.css" />
+  </head>
+  <body>
+    <header class="logo">re:root</header>
+    <div>
+      {{ customer.name}} <br />
+      {{ customer.vat_number }} <br />
+      {{ customer.address.street}}, {{ customer.address.number}} {{
+      customer.address.bus }} <br />
+      {{ customer.address.postal_code }} {{ customer.address.city }}
+    </div>
+    <div class="sizeLarge" id="factuur">INVOICE</div>
+    <div class="table-line">
+      <div class="column-line">
+        <div class="sizeLarge">Invoice Number</div>
+        <div>{{ invoice_number }}</div>
+      </div>
+      <div class="column-line">
+        <div class="sizeLarge">Invoice Date</div>
+        <div>{{invoice_date}}</div>
+      </div>
+      <div class="column-line">
+        <div class="sizeLarge">Due Date</div>
+        <div>{{due_date}}</div>
+      </div>
+      <div class="column-line">
+        <div class="sizeLarge">Period</div>
+        <div>{{period}}</div>
+      </div>
+    </div>
 
-        <div class="table">
-            <div class="row">
-                <div class="column first-column sizeLarge">DESCRIPTION</div>
-                <div class="column sizeLarge">QTY</div>
-                <div class="column sizeLarge">PRICE</div>
-                <div class="column sizeLarge">VAT</div>
-                <div class="column sizeLarge">SUBTOTAL</div>
-            </div>
-            {% for record in records %}
-            <div class="row">
-                <div class="column first-column margin-0">
-                    {{ record.service.description }}{% if record.comment != ""
-                    %} : {{record.comment}}{% endif %}
-                </div>
-                <div class="column">{{ record.amount}}</div>
-                <div class="column">&#8364; {{record.service.unit_price}}</div>
-                <div class="column">{{record.service.vat}}</div>
-                <div class="column">&#8364; {{record.price}}</div>
-            </div>
-            {% endfor %}
+    <div class="table">
+      <div class="row">
+        <div class="column first-column sizeLarge">DESCRIPTION</div>
+        <div class="column sizeLarge">QTY</div>
+        <div class="column sizeLarge">PRICE</div>
+        <div class="column sizeLarge">VAT</div>
+        <div class="column sizeLarge">SUBTOTAL</div>
+      </div>
+      {% for record in records %}
+      <div class="row">
+        <div class="column first-column margin-0">
+          {{ record.service.description }}{% if record.comment != "" %} :
+          {{record.comment}}{% endif %}
         </div>
+        <div class="column">{{ record.amount}}</div>
+        <div class="column">&#8364; {{record.service.unit_price}}</div>
+        <div class="column">{{record.service.vat}}</div>
+        <div class="column">&#8364; {{record.price}}</div>
+      </div>
+      {% endfor %}
+    </div>
 
-        <div class="total-container table">
-            <div class="row">
-                <div class="column sizeLarge">Total VAT excl:</div>
-                <div class="column sizeLarge">
-                    &#8364; {{total_vat_excluded}}
-                </div>
-            </div>
-            <div class="row">
-                <div class="column sizeLarge">Total VAT incl:</div>
-                <div class="column sizeLarge">
-                    &#8364; {{total_vat_included}}
-                </div>
-            </div>
-        </div>
-        <p class="opgemaakt">Created in Leuven</p>
-        <footer>
-            <p class="legal"></p>
-            <h3 class="legal-general">
-                Reroot BV &#8212; Kapucijnenvoer 37, bus 0601, 3000 Leuven
-                <br />BTW BE0797.177.474<br />IBAN BE63 7310 5448 8208
-            </h3>
-        </footer>
-    </body>
+    <div class="total-container table">
+      <div class="row">
+        <div class="column sizeLarge">Total VAT excl:</div>
+        <div class="column sizeLarge">&#8364; {{total_vat_excluded}}</div>
+      </div>
+      <div class="row">
+        <div class="column sizeLarge">Total VAT incl:</div>
+        <div class="column sizeLarge">&#8364; {{total_vat_included}}</div>
+      </div>
+    </div>
+    <p class="opgemaakt">Created in Leuven</p>
+    <footer>
+      <p class="legal"></p>
+      <h3 class="legal-general">
+        Reroot BV &#8212; Kapucijnenvoer 37, bus 0601, 3000 Leuven
+        <br />BTW BE0797.177.474<br />IBAN BE63 7310 5448 8208
+      </h3>
+    </footer>
+  </body>
 </html>

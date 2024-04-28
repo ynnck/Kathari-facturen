@@ -77,6 +77,12 @@ def cli() -> None:
         default=invoice.invoice_date,
         type=click.DateTime(["%Y/%m/%d", "%Y-%m-%d"]),
     )
+    ### Select Period date
+    period = click.prompt(
+        "Set period",
+        default=invoice_date.strftime("%B %Y"),
+        type=str
+    )
 
     ### Iterate Service Lines
     for i, service_line in enumerate(selected_customer.service_list, 1):
@@ -118,6 +124,7 @@ def cli() -> None:
 
     invoice = Invoice(
         customer=selected_customer,
+        period=period,
         counter=company.counter,
         invoice_date=invoice_date,
         invoice_number=invoice_number,

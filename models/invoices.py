@@ -36,6 +36,7 @@ class Invoice(BaseModel):
     records: list[InvoiceRecord] = []
     invoice_number: str = ""
     invoice_date: date = Field(default_factory=lambda: date.today())
+    period: str = ""
 
     @validator("invoice_number")
     def invoice_number_separates(cls, v: str, values, **kwargs):
@@ -52,9 +53,6 @@ class Invoice(BaseModel):
     def due_date(self) -> date:
         return self.invoice_date + timedelta(days=self.customer.payment_term)
 
-    @property
-    def period(self) -> str:
-        return self.invoice_date.strftime("%B %Y")
 
     @property
     def total_vat_excluded(self) -> Decimal:
