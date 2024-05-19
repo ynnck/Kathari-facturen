@@ -14,7 +14,6 @@ class Company(BaseModel):
     counter: int
     verlegging_text: str
 
-
     def get_active_customers(self) -> list[Customer]:
         return [customer for customer in self.customers if customer.active]
 

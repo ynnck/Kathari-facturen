@@ -53,7 +53,6 @@ class Invoice(BaseModel):
     def due_date(self) -> date:
         return self.invoice_date + timedelta(days=self.customer.payment_term)
 
-
     @property
     def total_vat_excluded(self) -> Decimal:
         return round(Decimal(sum([rec.price for rec in self.records])), 2)
@@ -71,9 +70,7 @@ class Invoice(BaseModel):
         return round(Decimal(total_vat_included), 2)
 
     def get_default_invoice_number(self, counter: int) -> str:
-        return (
-            f"{self.invoice_date.year}/{self.customer.abbreviation}/{counter:04d}"
-        )
+        return f"{self.invoice_date.year}/{self.customer.abbreviation}/{counter:04d}"
 
     def dict(self, *args, **kwargs) -> dict[str, Any]:
         values = super().dict(*args, **kwargs)

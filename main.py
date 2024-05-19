@@ -79,9 +79,7 @@ def cli() -> None:
     )
     ### Select Period date
     period = click.prompt(
-        "Set period",
-        default=invoice_date.strftime("%B %Y"),
-        type=str
+        "Set period", default=invoice_date.strftime("%B %Y"), type=str
     )
 
     ### Iterate Service Lines
