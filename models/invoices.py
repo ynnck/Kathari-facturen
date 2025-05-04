@@ -1,11 +1,10 @@
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 from decimal import Decimal
 from typing import Any, Optional
 
 import weasyprint  # type: ignore
-from devtools import debug
 from jinja2 import Environment, FileSystemLoader
-from pydantic import BaseModel, Field, ValidationError, root_validator, validator
+from pydantic import BaseModel, Field, ValidationError, validator
 
 from .customers import Customer, Service
 
